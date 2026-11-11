@@ -1,0 +1,3539 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pejuang NIP - Belajar Mandiri & Simulasi CAT SKD Terlengkap</title>
+  <!-- Mobile & PWA Meta Tags -->
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Pejuang NIP">
+  <meta name="description" content="Aplikasi Pembelajaran Lengkap dan Simulasi Try Out CAT CPNS Pejuang NIP Berbasis E-Book Resmi BKN">
+  <link rel="manifest" id="manifest-placeholder">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Font Google Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f8fafc;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .pulse-danger {
+      animation: pulseAlert 1.2s infinite;
+    }
+    @keyframes pulseAlert {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.55; }
+    }
+    .course-active {
+      background-color: #eff6ff !important;
+      border-left: 4px solid #2563eb !important;
+      color: #1d4ed8 !important;
+      font-weight: 700 !important;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- Top Navigation Bar -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('study')">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-blue-700 to-indigo-700 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+          <i data-lucide="award" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <div class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-blue-700 via-indigo-600 to-amber-600 bg-clip-text text-transparent flex items-center space-x-2">
+            <span>Pejuang NIP</span>
+          </div>
+          <div class="text-[10px] text-slate-400 font-semibold tracking-wide">EDISI MODUL & BANK SOAL LENGKAP</div>
+        </div>
+      </div>
+
+      <!-- Main Navigation Tabs -->
+      <nav class="hidden md:flex items-center space-x-1 text-sm font-semibold">
+        <button id="nav-study" onclick="switchTab('study')" class="px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 text-blue-600 bg-blue-50">
+          <i data-lucide="graduation-cap" class="w-4 h-4"></i>
+          <span>Kursus & Modul Terstruktur</span>
+        </button>
+        <button id="nav-sim" onclick="switchTab('sim')" class="px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 text-slate-600 hover:bg-slate-100">
+          <i data-lucide="monitor" class="w-4 h-4"></i>
+          <span>Simulasi CAT Resmi</span>
+        </button>
+        <button id="nav-quiz" onclick="switchTab('quiz')" class="px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 text-slate-600 hover:bg-slate-100">
+          <i data-lucide="zap" class="w-4 h-4"></i>
+          <span>Latihan Drill Kilat</span>
+        </button>
+        <button id="nav-tips" onclick="switchTab('tips')" class="px-4 py-2 rounded-lg transition-colors flex items-center space-x-2 text-slate-600 hover:bg-slate-100">
+          <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+          <span>Strategi & Tips Lulus</span>
+        </button>
+      </nav>
+
+      <!-- Quick Audio / PWA Install / Action -->
+      <div class="flex items-center space-x-2">
+        <button id="btnPwaInstall" onclick="installPWA()" class="hidden bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-bold px-3 py-2 rounded-lg transition flex items-center space-x-1.5" title="Pasang Aplikasi di HP / Komputer">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          <span class="hidden sm:inline">Install App</span>
+        </button>
+        <button id="soundToggleBtn" onclick="toggleSound()" class="p-2.5 rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition" title="Toggle Suara Responsif">
+          <i id="soundIcon" data-lucide="volume-2" class="w-4 h-4"></i>
+        </button>
+        <button onclick="startTryOutPrompt()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm px-4 py-2 rounded-lg shadow-sm shadow-blue-500/20 transition flex items-center space-x-1.5">
+          <i data-lucide="play" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Mulai CAT</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Bar -->
+    <div class="md:hidden flex border-t border-slate-200 bg-white px-2 py-1 justify-around text-xs font-semibold text-slate-600">
+      <button onclick="switchTab('study')" class="p-2 flex flex-col items-center text-blue-600">
+        <i data-lucide="graduation-cap" class="w-4 h-4 mb-0.5"></i>
+        <span>Modul</span>
+      </button>
+      <button onclick="switchTab('sim')" class="p-2 flex flex-col items-center">
+        <i data-lucide="monitor" class="w-4 h-4 mb-0.5"></i>
+        <span>CAT</span>
+      </button>
+      <button onclick="switchTab('quiz')" class="p-2 flex flex-col items-center">
+        <i data-lucide="zap" class="w-4 h-4 mb-0.5"></i>
+        <span>Drill</span>
+      </button>
+      <button onclick="switchTab('tips')" class="p-2 flex flex-col items-center">
+        <i data-lucide="compass" class="w-4 h-4 mb-0.5"></i>
+        <span>Tips</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Notification Toast Container -->
+  <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <!-- MAIN APP CONTAINER -->
+  <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+
+    <!-- TAB 1: KURSUS & RANGKUMAN MATERI (COURSE LMS SYSTEM) -->
+    <section id="tab-study-content" class="block space-y-6">
+      
+      <!-- Hero Banner Pejuang NIP -->
+      <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-900 rounded-3xl text-white p-6 sm:p-8 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-3xl relative z-10 space-y-3">
+          <span class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-semibold tracking-wide border border-blue-400/30">
+            <i data-lucide="book-marked" class="w-3.5 h-3.5"></i>
+            <span>Kurikulum Terpadu SKD PermenPAN-RB & Sumber Resmi</span>
+          </span>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight leading-snug">
+            Akademi Belajar Mandiri: Materi Ringkas & Bahasa Mudah Dipahami
+          </h1>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
+            Materi hasil ekstraksi dan sintesis buku resmi CPNS: Nasionalisme, Integritas, Bela Negara, Pilar Negara (Pancasila, UUD 45, Bhinneka Tunggal Ika, NKRI), Anti-Radikalisme, Penalaran Verbal/Numerik/Figural, hingga Mindset Skor 5 TKP. Pelajari bab materi secara mendalam dan uji pemahaman langsung di kuis checkpoint!
+          </p>
+          <div class="pt-1 flex flex-wrap items-center gap-3">
+            <div class="flex items-center space-x-2 text-xs text-amber-300 bg-amber-500/10 px-3 py-1.5 rounded-lg border border-amber-500/20">
+              <i data-lucide="check-circle" class="w-4 h-4"></i>
+              <span id="course-progress-label">Progres Belajar: 0 Modul Selesai</span>
+            </div>
+            <button onclick="startTryOutPrompt()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-1.5 rounded-lg transition text-xs flex items-center space-x-1.5">
+              <i data-lucide="play" class="w-3.5 h-3.5"></i>
+              <span>Uji Kemampuan di Try Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- COURSE LAYOUT: SIDEBAR SILABUS + LESSON VIEWER -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left: Course Navigation Silabus (4 Cols) -->
+        <div class="lg:col-span-4 bg-white border border-slate-200 rounded-2xl p-4 shadow-xs sticky top-20">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-3">
+            <h3 class="font-extrabold text-slate-900 text-sm flex items-center space-x-1.5">
+              <i data-lucide="list-ordered" class="w-4 h-4 text-blue-600"></i>
+              <span>Daftar Modul Kursus</span>
+            </h3>
+            <span class="text-[11px] font-bold text-slate-400" id="syllabus-count">0 Bab</span>
+          </div>
+
+          <!-- Course Filter by Category -->
+          <div class="flex gap-1 mb-3 overflow-x-auto pb-1 text-[11px] font-bold">
+            <button onclick="filterCourseCategory('all', this)" class="course-filter-btn px-2.5 py-1 rounded-md bg-blue-600 text-white">Semua</button>
+            <button onclick="filterCourseCategory('TWK', this)" class="course-filter-btn px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 hover:bg-slate-200">TWK</button>
+            <button onclick="filterCourseCategory('TIU', this)" class="course-filter-btn px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 hover:bg-slate-200">TIU</button>
+            <button onclick="filterCourseCategory('TKP', this)" class="course-filter-btn px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 hover:bg-slate-200">TKP</button>
+          </div>
+
+          <!-- Search in Course -->
+          <div class="relative mb-3">
+            <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-3 text-slate-400"></i>
+            <input type="text" id="courseSearchInput" onkeyup="searchCourseLessons(this.value)" placeholder="Cari materi, pasal, rumus..." class="w-full text-xs pl-8 pr-3 py-2 rounded-xl border border-slate-200 bg-slate-50 focus:outline-blue-500">
+          </div>
+
+          <!-- Lesson List Group -->
+          <div id="course-lesson-list" class="space-y-1.5 max-h-[560px] overflow-y-auto custom-scrollbar pr-1">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+
+        <!-- Right: Lesson Content Viewer (8 Cols) -->
+        <div class="lg:col-span-8 space-y-6">
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs">
+            
+            <!-- Lesson Header -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100 mb-6">
+              <div class="space-y-1">
+                <div class="flex items-center space-x-2">
+                  <span id="lesson-category-badge" class="px-2.5 py-0.5 rounded-md text-[11px] font-extrabold bg-blue-100 text-blue-800 uppercase">TWK</span>
+                  <span id="lesson-read-time" class="text-xs text-slate-400 font-medium flex items-center space-x-1">
+                    <i data-lucide="clock" class="w-3 h-3"></i>
+                    <span>7 menit baca</span>
+                  </span>
+                </div>
+                <h2 id="lesson-title" class="text-xl sm:text-2xl font-extrabold text-slate-900 leading-tight">
+                  Memuat Modul Pembelajaran...
+                </h2>
+              </div>
+              <button id="btn-mark-complete" onclick="toggleLessonComplete()" class="px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 transition flex items-center space-x-1.5">
+                <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i>
+                <span id="btn-complete-text">Tandai Selesai</span>
+              </button>
+            </div>
+
+            <!-- Lesson Body Content -->
+            <div id="lesson-content-body" class="prose prose-slate max-w-none text-sm leading-relaxed space-y-4 text-slate-700">
+              <!-- Injected via JS -->
+            </div>
+
+            <!-- Checkpoint Mini Quiz for this Lesson -->
+            <div class="mt-8 pt-6 border-t border-slate-200">
+              <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-3">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-extrabold text-indigo-700 flex items-center space-x-1.5 uppercase tracking-wide">
+                    <i data-lucide="help-circle" class="w-4 h-4"></i>
+                    <span>Kuis Pemahaman Cepat (Checkpoint)</span>
+                  </span>
+                  <span class="text-[11px] text-slate-400 font-medium">Uji pemahaman materi ini</span>
+                </div>
+                <p id="checkpoint-question" class="text-sm font-semibold text-slate-800">
+                  Pertanyaan kuis...
+                </p>
+                <div id="checkpoint-options" class="grid grid-cols-1 gap-2 pt-1">
+                  <!-- Options injected via JS -->
+                </div>
+                <div id="checkpoint-feedback" class="hidden p-3 rounded-xl text-xs"></div>
+              </div>
+            </div>
+
+            <!-- Bottom Lesson Navigation (Prev & Next Lesson) -->
+            <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+              <button id="btn-prev-lesson" onclick="navigateLesson(-1)" class="px-4 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-bold transition flex items-center space-x-1">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Bab Sebelumnya</span>
+              </button>
+              <button id="btn-next-lesson" onclick="navigateLesson(1)" class="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition flex items-center space-x-1">
+                <span>Bab Selanjutnya</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TAB 2: SIMULASI TRY OUT CAT RESMI -->
+    <section id="tab-sim-content" class="hidden space-y-6">
+      
+      <!-- LOBBY / PRE-START MODAL OR VIEW -->
+      <div id="sim-lobby" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 text-center max-w-2xl mx-auto shadow-sm">
+        <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <i data-lucide="laptop" class="w-8 h-8"></i>
+        </div>
+        <h2 class="text-2xl font-extrabold text-slate-900 mb-2">Simulasi Try Out CAT Pejuang NIP</h2>
+        <p class="text-slate-500 text-sm mb-6 leading-relaxed">
+          Sistem ujian realistis berstandar CAT BKN (PermenPAN-RB No. 27/2021 & kisi-kisi resmi). Setiap kali Anda menekan mulai, <strong>soal akan diacak dan dirotasi secara otomatis</strong> dari ratusan bank soal PDF agar tidak monoton.
+          <br><br>
+          <strong>Ketentuan Skor & Passing Grade:</strong>
+          <br>• TWK: Benar +5, Salah 0 (Passing Grade: 65)
+          <br>• TIU: Benar +5, Salah 0 (Passing Grade: 80)
+          <br>• TKP: Skala Bobot 1 sampai 5 (Passing Grade: 166)
+        </p>
+
+        <div class="grid grid-cols-3 gap-3 mb-6 text-left">
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <div class="text-[11px] text-slate-400 uppercase font-semibold">Standar Ujian</div>
+            <div class="text-sm sm:text-base font-bold text-slate-800">110 Soal Resmi</div>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <div class="text-[11px] text-slate-400 uppercase font-semibold">Alokasi Waktu</div>
+            <div class="text-sm sm:text-base font-bold text-slate-800">100 Menit</div>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
+            <div class="text-[11px] text-slate-400 uppercase font-semibold">Komposisi Soal</div>
+            <div class="text-sm sm:text-base font-bold text-blue-600">30 TWK | 35 TIU | 45 TKP</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row justify-center gap-3">
+          <button onclick="startTryOut('full')" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg shadow-blue-500/20 transition flex items-center justify-center space-x-2">
+            <i data-lucide="play-circle" class="w-5 h-5"></i>
+            <span>Try Out Lengkap (110 Soal - 100 Menit)</span>
+          </button>
+          <button onclick="startTryOut('short')" class="w-full sm:w-auto bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold px-6 py-3.5 rounded-xl transition flex items-center justify-center space-x-2">
+            <i data-lucide="zap" class="w-5 h-5"></i>
+            <span>Try Out Kilat (30 Soal - 27 Menit)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ACTIVE CAT INTERFACE (BKN Realism) -->
+      <div id="sim-exam-screen" class="hidden">
+        
+        <!-- CAT Top Bar: Timer & Status -->
+        <div class="bg-white border border-slate-200 rounded-xl p-4 mb-4 flex flex-wrap items-center justify-between gap-4 shadow-xs">
+          <div class="flex items-center space-x-3">
+            <div class="px-3 py-1.5 rounded-lg bg-blue-100 text-blue-800 font-bold text-xs uppercase" id="cat-subtest-badge">
+              TWK - Tes Wawasan Kebangsaan
+            </div>
+            <span class="text-slate-400 text-xs">|</span>
+            <span class="text-xs font-semibold text-slate-600" id="cat-progress-text">Soal 1 dari 110</span>
+          </div>
+
+          <!-- Countdown Timer -->
+          <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2 text-slate-700 font-bold bg-slate-100 px-3 py-1.5 rounded-lg">
+              <i data-lucide="clock" class="w-4 h-4 text-blue-600"></i>
+              <span id="cat-timer" class="font-mono text-base tracking-wider text-slate-900">100:00</span>
+            </div>
+            <button onclick="finishExamConfirmation()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs px-4 py-2 rounded-lg transition shadow-xs flex items-center space-x-1.5">
+              <i data-lucide="check-square" class="w-4 h-4"></i>
+              <span>Selesai Ujian</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Grid Layout: Question on Left, Numbers Navigation on Right -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+          <!-- Left Main Question Card (3 Cols) -->
+          <div class="lg:col-span-3 bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col justify-between min-h-[480px]">
+            <div>
+              <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                <span class="text-xs font-bold text-slate-400 tracking-wider uppercase" id="cat-question-header">Nomor 1</span>
+                <span class="text-xs text-slate-400 font-medium" id="cat-source-tag">Modul Resmi SKD</span>
+              </div>
+
+              <!-- Question Text -->
+              <p id="cat-question-text" class="text-slate-800 text-base sm:text-lg font-medium leading-relaxed mb-6 whitespace-pre-line">
+                Memuat soal...
+              </p>
+
+              <!-- Option Choices -->
+              <div id="cat-options-container" class="space-y-3">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Bottom Actions: Prev, Ragu-ragu, Next -->
+            <div class="pt-8 mt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+              <button id="btn-prev-question" onclick="navigateQuestion(-1)" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-50 font-semibold text-xs transition flex items-center space-x-1.5">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                <span>Sebelumnya</span>
+              </button>
+
+              <label class="flex items-center space-x-2 cursor-pointer bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 px-4 py-2 rounded-xl text-xs font-bold transition select-none">
+                <input type="checkbox" id="raguCheckbox" onchange="toggleRaguCurrent()" class="rounded border-amber-400 text-amber-600 focus:ring-0">
+                <span>Ragu - Ragu</span>
+              </label>
+
+              <button id="btn-next-question" onclick="navigateQuestion(1)" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs shadow-md shadow-blue-500/20 transition flex items-center space-x-1.5">
+                <span>Selanjutnya</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Sidebar: Number Palette (1 Col) -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs">
+            <h4 class="font-bold text-slate-900 text-sm mb-3 flex items-center justify-between">
+              <span>Nomor Soal</span>
+              <span id="answered-counter" class="text-xs font-normal text-slate-500">0/110 Terjawab</span>
+            </h4>
+
+            <!-- Legend -->
+            <div class="grid grid-cols-3 gap-1 mb-4 text-[10px] text-slate-500 text-center font-medium">
+              <div class="flex items-center space-x-1">
+                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                <span>Dijawab</span>
+              </div>
+              <div class="flex items-center space-x-1">
+                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                <span>Ragu</span>
+              </div>
+              <div class="flex items-center space-x-1">
+                <span class="w-3 h-3 rounded-full bg-slate-200"></span>
+                <span>Kosong</span>
+              </div>
+            </div>
+
+            <!-- Numbers Grid -->
+            <div id="cat-numbers-grid" class="grid grid-cols-5 gap-2 max-h-72 overflow-y-auto custom-scrollbar p-1">
+              <!-- Number buttons generated via JS -->
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 space-y-2">
+              <button onclick="finishExamConfirmation()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs transition">
+                Kumpulkan Lembar Ujian
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RESULTS & COMPREHENSIVE DISCUSSION SCREEN -->
+      <div id="sim-result-screen" class="hidden space-y-8">
+        
+        <!-- Score Card Banner -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+          <div class="text-center max-w-xl mx-auto space-y-3">
+            <div id="passing-status-badge" class="inline-flex items-center space-x-1.5 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase">
+              <!-- Injected by JS: Lulus / Belum Lulus -->
+            </div>
+            <h2 class="text-3xl font-extrabold text-slate-900" id="total-score-display">Skor Akhir: 0</h2>
+            <p id="result-verdict-text" class="text-slate-500 text-sm">
+              Analisis kelulusan berdasarkan ambang batas resmi MenPAN-RB.
+            </p>
+          </div>
+
+          <!-- Breakdown per subtes -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+            <div class="p-4 rounded-xl border border-slate-100 bg-slate-50" id="card-score-twk">
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+                <span class="font-bold">TWK</span>
+                <span id="twk-pg-target">Passing Grade: 65</span>
+              </div>
+              <div class="text-2xl font-extrabold text-slate-800" id="score-twk-val">0</div>
+              <div class="text-xs mt-1" id="twk-status-label">-</div>
+            </div>
+
+            <div class="p-4 rounded-xl border border-slate-100 bg-slate-50" id="card-score-tiu">
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+                <span class="font-bold">TIU</span>
+                <span id="tiu-pg-target">Passing Grade: 80</span>
+              </div>
+              <div class="text-2xl font-extrabold text-slate-800" id="score-tiu-val">0</div>
+              <div class="text-xs mt-1" id="tiu-status-label">-</div>
+            </div>
+
+            <div class="p-4 rounded-xl border border-slate-100 bg-slate-50" id="card-score-tkp">
+              <div class="flex items-center justify-between text-xs text-slate-500 mb-1">
+                <span class="font-bold">TKP</span>
+                <span id="tkp-pg-target">Passing Grade: 166</span>
+              </div>
+              <div class="text-2xl font-extrabold text-slate-800" id="score-tkp-val">0</div>
+              <div class="text-xs mt-1" id="tkp-status-label">-</div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex flex-wrap justify-center gap-3">
+            <button onclick="restartExam()" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition flex items-center space-x-2">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+              <span>Coba Paket Acak Baru</span>
+            </button>
+            <button onclick="scrollToId('discussion-section')" class="px-6 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50 transition flex items-center space-x-2">
+              <i data-lucide="file-check" class="w-4 h-4 text-emerald-600"></i>
+              <span>Lihat Pembahasan Lengkap</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Section: Pembahasan Detail Soal -->
+        <div id="discussion-section" class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 border-b border-slate-100 mb-6 gap-2">
+            <div>
+              <h3 class="text-lg font-extrabold text-slate-900">Kunci Jawaban & Pembahasan Mendalam</h3>
+              <p class="text-xs text-slate-500">Evaluasi setiap butir soal untuk memahami konsep dan trik pengerjaan cepat</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <select id="discussionFilter" onchange="filterDiscussion(this.value)" class="text-xs border border-slate-200 rounded-lg p-2 font-medium bg-slate-50">
+                <option value="all">Semua Soal</option>
+                <option value="wrong">Soal Salah / Belum Terjawab</option>
+                <option value="twk">Hanya TWK</option>
+                <option value="tiu">Hanya TIU</option>
+                <option value="tkp">Hanya TKP</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Dynamic Discussion List -->
+          <div id="discussion-list" class="space-y-6">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- TAB 3: BANK SOAL DRILL KILAT -->
+    <section id="tab-quiz-content" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
+        <div class="max-w-3xl">
+          <h2 class="text-xl font-bold text-slate-900 mb-1">Drill Latihan Cepat Berdasarkan Kategori Soal</h2>
+          <p class="text-xs text-slate-500 mb-4">
+            Pilih topik spesifik yang ingin dilatih. Seluruh soal diambil lengkap dari 4 PDF panduan resmi dengan pembahasan jelas dan mudah dipahami. Soal akan <strong>diacak terus-menerus setiap kali tombol kategori diklik</strong>.
+          </p>
+          <div class="flex flex-wrap gap-2 mb-6">
+            <button data-cat="all" onclick="setDrillCategory('all', this)" class="drill-btn px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white">Semua Kategori</button>
+            <button data-cat="pancasila" onclick="setDrillCategory('pancasila', this)" class="drill-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Pancasila & Butir P4</button>
+            <button data-cat="uud" onclick="setDrillCategory('uud', this)" class="drill-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">UUD 1945 & Konstitusi</button>
+            <button data-cat="tatanegara" onclick="setDrillCategory('tatanegara', this)" class="drill-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Tata Negara & Otda</button>
+            <button data-cat="sejarah" onclick="setDrillCategory('sejarah', this)" class="drill-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Sejarah & Bela Negara</button>
+            <button data-cat="kebijakan" onclick="setDrillCategory('kebijakan', this)" class="drill-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">Kebijakan Moneter & Fiskal</button>
+            <button data-cat="verbal" onclick="setDrillCategory('verbal', this)" class="drill-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">TIU Verbal (Sinonim/Antonim/Analogi)</button>
+            <button data-cat="tiu" onclick="setDrillCategory('tiu', this)" class="drill-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">TIU Numerik, Deret & Logika</button>
+            <button data-cat="tkp" onclick="setDrillCategory('tkp', this)" class="drill-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200">TKP Karakteristik Pribadi & Anti-Radikalisme</button>
+          </div>
+        </div>
+
+        <!-- Drill Practice Container -->
+        <div id="drill-container" class="border border-slate-100 bg-slate-50/50 rounded-2xl p-6">
+          <div id="drill-question-box" class="space-y-4">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: TIPS & STRATEGI PEJUANG NIP -->
+    <section id="tab-tips-content" class="hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs">
+        <h2 class="text-xl font-extrabold text-slate-900 mb-4 flex items-center space-x-2">
+          <i data-lucide="compass" class="w-5 h-5 text-indigo-600"></i>
+          <span>Strategi & Tip Praktis Menembus Seleksi CPNS (Pejuang NIP)</span>
+        </h2>
+        <p class="text-sm text-slate-600 mb-6">
+          Disarikan langsung dari buku panduan resmi BKN, E-Book BTW Bimbel CPNS 2020, Media Eduka 2021, dan Super Diktat Grasindo.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <div class="space-y-4">
+            <div class="p-5 rounded-2xl bg-blue-50/60 border border-blue-100">
+              <h4 class="font-bold text-blue-900 text-sm flex items-center space-x-2 mb-2">
+                <i data-lucide="heart-pulse" class="w-4 h-4 text-blue-600"></i>
+                <span>1. Persiapan Fisik & Mental H-1 Ujian</span>
+              </h4>
+              <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside leading-relaxed">
+                <li><strong>Istirahat yang Cukup:</strong> Satu hari sebelum ujian, hentikan belajar larut malam (SKS tidak efektif untuk SKD). Tubuh dan memori harus segar.</li>
+                <li><strong>Hindari Minum Obat & Kafein Berlebih:</strong> Cegah debar jantung atau rasa mengantuk tiba-tiba yang membuyarkan fokus CAT.</li>
+                <li><strong>Orientasi Lokasi Ujian:</strong> Cek lokasi tes 1-2 hari sebelumnya untuk memperkirakan rute perjalanan dan menghindari keterlambatan.</li>
+                <li><strong>Datang 45 Menit Lebih Awal:</strong> Memberikan waktu adaptasi suhu ruangan, ketenangan mental, dan registrasi PIN peserta.</li>
+              </ul>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-amber-50/60 border border-amber-100">
+              <h4 class="font-bold text-amber-900 text-sm flex items-center space-x-2 mb-2">
+                <i data-lucide="timer" class="w-4 h-4 text-amber-600"></i>
+                <span>2. Manajemen Waktu 54 Detik (Strategi CAT)</span>
+              </h4>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Total waktu CAT adalah 100 menit untuk 110 butir soal (rata-rata 54 detik per butir soal).
+                <br>• <strong>Urutan Ideal:</strong> Kerjakan TKP terlebih dahulu (fokus skor 5) atau TWK hafalan, lalu terakhir TIU hitungan yang butuh coret-coretan.
+                <br>• Jangan berkutat pada 1 soal hitungan TIU lebih dari 60 detik! Jika buntu, pilih tebakan rasional, tandai ragu, dan lanjut.
+                <br>• Sistem CAT tidak menggunakan sistem minus! Pastikan seluruh nomor terjawab sebelum waktu habis.
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="p-5 rounded-2xl bg-emerald-50/60 border border-emerald-100">
+              <h4 class="font-bold text-emerald-900 text-sm flex items-center space-x-2 mb-2">
+                <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+                <span>3. Trik Jitu Per Subtes Ujian</span>
+              </h4>
+              <div class="text-xs text-slate-600 space-y-2">
+                <p>• <strong>TWK (Nasionalisme, Bela Negara, Pilar):</strong> Kuasai perbedaan pokok tokoh BPUPKI/PPKI, 4 kali amandemen UUD 45, hierarki hukum UU No. 12/2011, serta perlawanan fisik vs diplomasi.</p>
+                <p>• <strong>TIU (Verbal, Numerik, Logika, Figural):</strong> Untuk sinonim/antonim jangan pilih kata berbunyi mirip soal. Gunakan trik selisih deret bertingkat dan sifat distributif bilangan.</p>
+                <p>• <strong>TKP (Integritas, Pelayanan, Jejaring, Anti-Radikalisme):</strong> Selalu pilih opsi yang proaktif, berorientasi solusi tanpa konflik, patuh SOP kedinasan, dan menolak gratifikasi/radikalisme secara santun dan tegas.</p>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-indigo-50/60 border border-indigo-100">
+              <h4 class="font-bold text-indigo-900 text-sm flex items-center space-x-2 mb-2">
+                <i data-lucide="target" class="w-4 h-4 text-indigo-600"></i>
+                <span>4. Ambang Batas Resmi Passing Grade SKD</span>
+              </h4>
+              <div class="text-xs text-slate-600 space-y-1">
+                <p>• <strong>TWK (30 soal):</strong> Passing Grade 65 (Minimal 13 soal benar)</p>
+                <p>• <strong>TIU (35 soal):</strong> Passing Grade 80 (Minimal 16 soal benar)</p>
+                <p>• <strong>TKP (45 soal):</strong> Passing Grade 166 (Rata-rata bobot 3.69+ per butir)</p>
+                <p class="text-[11px] text-indigo-700 font-semibold pt-1">Total Skor Maksimal: 550 Poin (TWK 150 + TIU 175 + TKP 225).</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL KONFIRMASI SELESAI UJIAN -->
+  <div id="modalConfirm" class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-xl border border-slate-100">
+      <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center">
+        <i data-lucide="alert-circle" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold text-slate-900">Akhiri Ujian Sekarang?</h3>
+        <p id="confirmModalDesc" class="text-xs text-slate-500 mt-1 leading-relaxed">
+          Masih ada beberapa soal yang belum Anda jawab atau ditandai ragu-ragu. Apakah Anda yakin ingin menyelesaikan simulasi ini?
+        </p>
+      </div>
+      <div class="flex items-center justify-end space-x-3 pt-3">
+        <button onclick="closeModal('modalConfirm')" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">
+          Kembali Kerjakan
+        </button>
+        <button onclick="submitExam()" class="px-5 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white transition shadow-sm">
+          Ya, Selesaikan & Hitung Nilai
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ========================================================
+       DATABASE KURSUS & MODUL LENGKAP (POLA SINTESIS DARI 4 PDF)
+       Bahasa dibuat ringkas, mudah dipahami, berorientasi ujian
+       ======================================================== */
+    const COURSE_LESSONS = [
+      {
+        id: "twk-nasionalisme",
+        category: "TWK",
+        title: "Modul 1: Konsep Nasionalisme, Bentuk-Bentuk, & Peristiwa Sejarah",
+        readTime: "7 menit",
+        content: `
+          <h4 class="font-bold text-slate-900 text-base mb-2">1. Pengertian Sederhana Nasionalisme</h4>
+          <p>Secara bahasa, nasionalisme berasal dari kata <em>nation</em> (bangsa). Menurut KBBI, nasionalisme adalah paham kebangsaan yang mengajarkan cinta mendalam terhadap bangsa dan tanah air sendiri. <strong>Penting:</strong> Nasionalisme Indonesia berbeda dengan <em>Chauvinisme</em>. Chauvinisme adalah rasa cinta bangsa yang membabi-buta hingga merendahkan bangsa lain (seperti fasisme Hitler), sedangkan nasionalisme Indonesia tetap menjunjung perdamaian dunia (Pembukaan UUD 1945 alinea IV).</p>
+          
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">2. Bentuk-Bentuk Nasionalisme yang Sering Muncul di Tes</h4>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>Nasionalisme Kewarganegaraan (Sipil):</strong> Negara memperoleh legitimasi dari partisipasi aktif rakyatnya (kehendak politik bersama).</li>
+            <li><strong>Nasionalisme Etnis:</strong> Semangat kebangsaan berakar dari kesamaan budaya asal atau etnis masyarakat.</li>
+            <li><strong>Nasionalisme Romantik/Identitas/Organik:</strong> Kebenaran politik berasal secara alamiah/organik sebagai ekspresi ras atau bangsa.</li>
+            <li><strong>Nasionalisme Budaya:</strong> Berdasarkan budaya bersama yang dipelajari bersama, bukan garis keturunan rasial.</li>
+            <li><strong>Nasionalisme Agama:</strong> Legitimasi politik bersumber dari persamaan agama (contoh: partai keagamaan di beberapa negara).</li>
+          </ul>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">3. Tonggak Sejarah Bukti Nasionalisme Bangsa</h4>
+          <p>• <strong>Pertempuran 5 Hari di Semarang (15-20 Okt 1945):</strong> Perlawanan sengit pemuda melawan tentara Jepang pasca dr. Kariadi gugur ditembak saat memeriksa tandon air.<br>
+          • <strong>Pertempuran Surabaya (10 Nov 1945):</strong> Perang terbesar pasca kemerdekaan dipicu tewasnya Brigjen Mallaby dan penolakan ultimatum Sekutu, dipimpin Bung Tomo dan Gubernur Suryo.<br>
+          • <strong>Bandung Lautan Api (23 Maret 1946):</strong> Politik bumi hangus sekitar 200.000 warga Bandung agar kota tidak dijadikan markas strategis Sekutu & NICA.<br>
+          • <strong>Pertempuran Laut Aru (15 Jan 1962):</strong> Gugurnya Komodor Yos Sudarso di atas KRI Macan Tutul dengan seruan: <em>"Kobarkan semangat pertempuran!"</em>.</p>
+        `,
+        quiz: {
+          q: "Perbedaan mendasar antara paham Nasionalisme Indonesia dengan paham Chauvinisme terletak pada....",
+          options: [
+            "Nasionalisme hanya berlaku pada saat masa perang fisik",
+            "Chauvinisme menempatkan cinta bangsa sendiri secara ekstrem dan merendahkan martabat bangsa lain",
+            "Nasionalisme menolak hubungan kerja sama internasional",
+            "Chauvinisme mengutamakan musyawarah mufakat"
+          ],
+          correct: 1,
+          explanation: "Chauvinisme adalah rasa cinta tanah air yang sempit dan berlebihan serta memandang rendah bangsa lain, sedangkan nasionalisme Indonesia menjunjung tinggi persaudaraan dunia."
+        }
+      },
+      {
+        id: "twk-integritas",
+        category: "TWK",
+        title: "Modul 2: Integritas Diri, Kredibilitas, & Anti-Korupsi",
+        readTime: "7 menit",
+        content: `
+          <h4 class="font-bold text-slate-900 text-base mb-2">1. Apa itu Integritas?</h4>
+          <p>Integritas berasal dari bahasa Latin <em>integer</em>, yang berarti utuh, lengkap, dan kukuh. Orang yang berintegritas memiliki keselarasan penuh antara apa yang dipikirkan di hati, diucapkan lewat kata-kata, dan dilakukan dalam perbuatan (prinsip <em>walk the talk</em>).</p>
+          
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">2. Dua Fungsi Utama Integritas</h4>
+          <div class="space-y-2">
+            <div class="p-3 bg-slate-50 border rounded-xl">
+              <strong>• Fungsi Kognitif (Kepala/Otak):</strong> Mencakup kecerdasan moral dan wawasan diri (self-insight). Mendorong individu memiliki ilmu pengetahuan dan pemahaman moral yang jernih.
+            </div>
+            <div class="p-3 bg-slate-50 border rounded-xl">
+              <strong>• Fungsi Afektif (Hati Nurani):</strong> Mencakup nurani batin dan harga diri. Menjaga manusia agar tetap peka terhadap kebenaran dan tidak terjebak kemunafikan.
+            </div>
+          </div>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">3. Integritas vs Kredibilitas</h4>
+          <p>Kredibilitas berhubungan dengan <em>head</em> (kemampuan pikir, hard skill, kompetensi, dan pengalaman), sedangkan Integritas berhubungan dengan <em>heart</em> (nurani batin, kejujuran, komitmen, dan keteguhan etika). Sukses tanpa integritas adalah kegagalan semu.</p>
+        `,
+        quiz: {
+          q: "Fungsi afektif dari integritas pribadi seseorang berkaitan erat dengan....",
+          options: [
+            "Kecakapan logika matematika dan aljabar",
+            "Pemeliharaan hati nurani, kepekaan empati, dan harga diri moral",
+            "Kemampuan berpidato memengaruhi publik",
+            "Keterampilan teknis operasional komputer"
+          ],
+          correct: 1,
+          explanation: "Fungsi afektif integritas menjaga hati nurani dan harga diri manusia agar senantiasa memiliki empati moral dan kepekaan kebenaran."
+        }
+      },
+      {
+        id: "twk-bela-negara",
+        category: "TWK",
+        title: "Modul 3: Konsepsi Bela Negara & Landasan Hukum Konstitusi",
+        readTime: "8 menit",
+        content: `
+          <h4 class="font-bold text-slate-900 text-base mb-2">1. Hakikat Bela Negara</h4>
+          <p>Bela negara adalah sikap dan perilaku warga negara yang dijiwai oleh kecintaannya kepada NKRI berdasarkan Pancasila dan UUD 1945. Dilaksanakan secara <strong>Fisik</strong> (mengangkat senjata saat agresi militer mengancam kedaulatan) maupun <strong>Non-Fisik</strong> (meningkatkan pendidikan, ketaatan hukum, pengabdian sesuai profesi, dan inovasi sains).</p>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">2. Dasar Hukum Bela Negara</h4>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>Pasal 27 Ayat (3) UUD 1945:</strong> Setiap warga negara berhak dan wajib ikut serta dalam upaya pembelaan negara.</li>
+            <li><strong>Pasal 30 Ayat (1) UUD 1945:</strong> Tiap-tiap warga negara berhak dan wajib ikut serta dalam usaha pertahanan dan keamanan negara.</li>
+            <li><strong>Pasal 30 Ayat (2) UUD 1945:</strong> Sistem pertahanan keamanan rakyat semesta (Sishankamrata) menempatkan TNI dan Polri sebagai kekuatan utama, rakyat sebagai kekuatan pendukung.</li>
+            <li><strong>UU No. 23 Tahun 2019:</strong> Pengelolaan Sumber Daya Nasional untuk Pertahanan Negara.</li>
+            <li><strong>Keppres No. 28 Tahun 2006:</strong> Menetapkan tanggal <strong>19 Desember</strong> sebagai Hari Bela Negara (memperingati berdirinya PDRI Bukittinggi tahun 1948).</li>
+          </ul>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">3. Lima Nilai Dasar Bela Negara</h4>
+          <p>1) Cinta tanah air, 2) Sadar berbangsa dan bernegara, 3) Setia pada Pancasila sebagai ideologi, 4) Rela berkorban untuk bangsa dan negara, 5) Memiliki kemampuan awal bela negara (psikis & jasmani).</p>
+        `,
+        quiz: {
+          q: "Peringatan Hari Bela Negara setiap tanggal 19 Desember dilatarbelakangi oleh peristiwa sejarah....",
+          options: [
+            "Deklarasi Djuanda batas laut 12 mil",
+            "Terbentuknya Pemerintahan Darurat Republik Indonesia (PDRI) di Bukittinggi akibat Agresi Militer Belanda II",
+            "Peristiwa Bandung Lautan Api",
+            "Serangan Umum 1 Maret 1949 di Yogyakarta"
+          ],
+          correct: 1,
+          explanation: "Hari Bela Negara ditetapkan untuk memperingati deklarasi Pemerintahan Darurat RI (PDRI) oleh Mr. Syafruddin Prawiranegara di Bukittinggi pada 19 Desember 1948 ketika pimpinan negara ditawan Belanda."
+        }
+      },
+      {
+        id: "twk-pancasila-butir",
+        category: "TWK",
+        title: "Modul 4: Falsafah Pancasila, Sejarah Lahirnya, & 45 Butir P4 (Tap MPR I/2003)",
+        readTime: "9 menit",
+        content: `
+          <h4 class="font-bold text-slate-900 text-base mb-2">1. Kronologi Perumusan Pancasila</h4>
+          <p>• <strong>29 Mei 1945:</strong> Mr. Muh. Yamin mengusulkan Peri Kebangsaan, Peri Kemanusiaan, Peri Ketuhanan, Peri Kerakyatan, Kesejahteraan Rakyat.<br>
+          • <strong>31 Mei 1945:</strong> Prof. Dr. Soepomo mengusulkan teori Integralistik (Persatuan, Kekeluargaan, Keseimbangan Lahir Batin, Musyawarah, Keadilan Rakyat).<br>
+          • <strong>1 Juni 1945:</strong> Ir. Soekarno menyampaikan pidato calon dasar negara yang dinamai <em>Pancasila</em>. Diperas menjadi Trisila (Sosio-nasionalisme, Sosio-demokrasi, Ketuhanan), dan diperas lagi menjadi Ekasila (Gotong Royong).<br>
+          • <strong>22 Juni 1945:</strong> Panitia Sembilan menyusun Piagam Jakarta (Jakarta Charter).<br>
+          • <strong>18 Agustus 1945:</strong> PPKI mengesahkan UUD 1945 dan mengganti 7 kata pada sila pertama menjadi <em>Ketuhanan Yang Maha Esa</em> demi keutuhan bangsa.</p>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">2. Struktur 45 Butir Pengamalan Pancasila (Tap MPR No. I/MPR/2003)</h4>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>Sila 1 (Bintang Tunggal - 7 Butir):</strong> Toleransi antarumat beragama, tidak memaksakan agama/kepercayaan, kebebasan menjalankan ibadah sesuai keyakinan.</li>
+            <li><strong>Sila 2 (Rantai Emas - 10 Butir):</strong> Mengakui persamaan harkat & derajat, tenggang rasa (tepa selira), gemar kegiatan kemanusiaan, membela kebenaran.</li>
+            <li><strong>Sila 3 (Pohon Beringin - 7 Butir):</strong> Mengutamakan persatuan bangsa di atas pribadi/golongan, cinta tanah air, bangga produk Indonesia.</li>
+            <li><strong>Sila 4 (Kepala Banteng - 10 Butir):</strong> Mengutamakan musyawarah mufakat, tidak memaksakan kehendak, menghormati hasil keputusan bersama.</li>
+            <li><strong>Sila 5 (Padi & Kapas - 11 Butir):</strong> Keadilan sosial, suka bekerja keras, hidup hemat (menolak gaya hidup mewah/pemborosan), menghargai karya orang lain.</li>
+          </ul>
+        `,
+        quiz: {
+          q: "Sikap seorang pegawai yang menolak bergaya hidup mewah dan tidak menggunakan fasilitas kantor untuk kepentingan pribadi mencerminkan butir pengamalan sila ke....",
+          options: ["Pertama", "Kedua", "Ketiga", "Kelima"],
+          correct: 3,
+          explanation: "Tidak menggunakan hak milik untuk hal-hal yang bersifat pemborosan dan gaya hidup mewah merupakan butir pengamalan Sila Kelima (Keadilan Sosial)."
+        }
+      },
+      {
+        id: "twk-uud45-amandemen",
+        category: "TWK",
+        title: "Modul 5: UUD 1945 & Rangkuman Detail 4 Tahap Amandemen",
+        readTime: "9 menit",
+        content: `
+          <h4 class="font-bold text-slate-900 text-base mb-2">1. Karakteristik Konstitusi</h4>
+          <p>UUD 1945 memiliki sifat tertulis, singkat, supel, dan memuat norma-norma dasar hukum tertinggi. Berfungsi sebagai <em>Alat Kontrol</em> norma hukum di bawahnya, <em>Pengatur</em> pembagian kekuasaan negara, dan <em>Penentu</em> hak-kewajiban warga negara.</p>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">2. Empat Tahap Amandemen (1999–2002)</h4>
+          <div class="space-y-2 text-xs">
+            <div class="p-3 bg-slate-50 border rounded-xl">
+              <strong>• Amandemen I (19 Okt 1999):</strong> Pembatasan masa jabatan Presiden/Wapres maksimal 2 periode (Pasal 7). Pergeseran kekuasaan pembentukan UU ke DPR (Pasal 20).
+            </div>
+            <div class="p-3 bg-slate-50 border rounded-xl">
+              <strong>• Amandemen II (18 Ags 2000):</strong> Otonomi daerah desentralisasi (Pasal 18, 18A, 18B), penguatan fungsi DPR (Pasal 19-22), Bab lengkap Hak Asasi Manusia (Pasal 28A-28J), dan Sishankamrata (Pasal 30).
+            </div>
+            <div class="p-3 bg-slate-50 border rounded-xl">
+              <strong>• Amandemen III (9 Nov 2001):</strong> Kedaulatan rakyat berdasar UUD (Pasal 1 ayat 2), Pilpres langsung (Pasal 6A), pembentukan DPD, pembentukan MK (Mahkamah Konstitusi) dan KY (Komisi Yudisial), serta BPK mandiri.
+            </div>
+            <div class="p-3 bg-slate-50 border rounded-xl">
+              <strong>• Amandemen IV (10 Ags 2002):</strong> Penghapusan DPA, Bank Sentral independen (Pasal 23D), anggaran pendidikan minimal 20% APBN (Pasal 31 ayat 4), serta penetapan bahwa bentuk NKRI tidak dapat diubah (Pasal 37 ayat 5).
+            </div>
+          </div>
+        `,
+        quiz: {
+          q: "Lembaga baru yang lahir dari amanat Amandemen Ketiga UUD 1945 untuk mengawal konstitusi dan memutus sengketa hasil pemilu adalah....",
+          options: ["Komisi Pemberantasan Korupsi (KPK)", "Mahkamah Konstitusi (MK)", "Dewan Pertimbangan Agung (DPA)", "Komisi Pemilihan Umum (KPU)"],
+          correct: 1,
+          explanation: "Mahkamah Konstitusi (MK) dibentuk melalui Amandemen Ketiga UUD 1945 (Pasal 24C) yang disahkan pada tanggal 9 November 2001."
+        }
+      },
+      {
+        id: "twk-tatanegara-kebijakan",
+        category: "TWK",
+        title: "Modul 6: Sistem Tata Negara, Hubungan Pusat-Daerah, & Kebijakan Fiskal/Moneter",
+        readTime: "9 menit",
+        content: `
+          <h4 class="font-bold text-slate-900 text-base mb-2">1. Sistem Pembagian Kekuasaan (Checks and Balances)</h4>
+          <p>• <strong>Eksekutif:</strong> Presiden dan Wapres memegang kekuasaan pemerintahan (rule application function).<br>
+          • <strong>Legislatif:</strong> DPR (fungsi legislasi, anggaran, pengawasan), DPD (aspirasi daerah), dan MPR (mengubah/menetapkan UUD serta melantik Presiden).<br>
+          • <strong>Yudikatif:</strong> MA (kasasi dan uji materiil peraturan di bawah UU) dan MK (uji materiil UU terhadap UUD, sengketa kewenangan, pembubaran parpol, perselisihan pemilu).<br>
+          • <strong>Eksaminatif:</strong> BPK (pemeriksaan tanggung jawab keuangan negara bebas dan mandiri).</p>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">2. Urusan Pemerintahan Pusat vs Daerah (UU No. 23/2014)</h4>
+          <p>• <strong>Urusan Absolut (Murni Pusat):</strong> 1) Politik Luar Negeri, 2) Pertahanan, 3) Keamanan, 4) Yustisi/Peradilan, 5) Moneter & Fiskal Nasional, 6) Agama.<br>
+          • <strong>Urusan Konkuren:</strong> Dibagi antara pusat, provinsi, dan kabupaten/kota dengan asas akuntabilitas, efisiensi, dan eksternalitas.<br>
+          • <strong>Tiga Asas Pelaksanaan:</strong> Desentralisasi (penyerahan wewenang otonom), Dekonsentrasi (pelimpahan ke gubernur/perangkat vertikal), dan Tugas Pembantuan.</p>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">3. Kebijakan Moneter & Kebijakan Fiskal</h4>
+          <p>• <strong>Kebijakan Moneter (Bank Indonesia):</strong> Mengatur peredaran uang dan suku bunga. <em>Tight Money Policy</em> (mengurangi uang beredar untuk rem inflasi dengan menaikkan suku bunga & cadangan kas) vs <em>Easy Money Policy</em> (menambah uang beredar untuk genjot ekonomi).<br>
+          • <strong>Kebijakan Fiskal (Pemerintah/Kemenkeu):</strong> Mengatur penerimaan (pajak/PNBP) dan alokasi belanja negara (APBN).</p>
+        `,
+        quiz: {
+          q: "Menurut UU No. 23 Tahun 2014, urusan pemerintahan yang sepenuhnya tetap menjadi kewenangan absolut pemerintah pusat dan tidak diserahkan ke daerah otonom adalah....",
+          options: [
+            "Pariwisata dan kebudayaan daerah",
+            "Politik luar negeri, pertahanan, keamanan, yustisi, moneter fiskal, dan agama",
+            "Pengelolaan tata ruang dan kehutanan kabupaten",
+            "Pendidikan dasar dan menengah"
+          ],
+          correct: 1,
+          explanation: "6 urusan absolut yang mutlak kewenangan pemerintah pusat: Politik luar negeri, Pertahanan, Keamanan, Yustisi, Moneter/Fiskal Nasional, dan Agama."
+        }
+      },
+      {
+        id: "twk-anti-radikalisme",
+        category: "TWK",
+        title: "Modul 7: Anti-Radikalisme, Kerukunan Sosial & Karakter Moderasi Beragama",
+        readTime: "8 menit",
+        content: `
+          <h4 class="font-bold text-slate-900 text-base mb-2">1. Pengertian dan Karakteristik Radikalisme</h4>
+          <p>Radikalisme berasal dari kata <em>radix</em> (akar), yaitu paham atau gerakan yang menginginkan perubahan atau penjebolan tatanan sosial-politik secara drastis dengan cara kekerasan, intoleransi, dan pemaksaan kehendak. Dalam konteks kebangsaan, radikalisme menolak konsensus Pancasila, UUD 1945, dan keutuhan NKRI.</p>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">2. Faktor Pemicu Radikalisme</h4>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>Faktor Pemikiran Dangkal:</strong> Memahami doktrin agama secara tekstual, kaku (rigid), dan eksklusif tanpa memahami substansi kedamaian.</li>
+            <li><strong>Faktor Ekonomi & Sosial:</strong> Kemiskinan dan rasa termarjinalkan yang dimanfaatkan oknum penyebar doktrin kebencian.</li>
+            <li><strong>Faktor Ruang Digital (Media Sosial):</strong> Penyebaran narasi hoaks, disinformasi SARA, dan segregasi kelompok di dunia maya.</li>
+          </ul>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">3. Peran ASN dalam Menangkal Radikalisme</h4>
+          <p>ASN wajib berperan sebagai <strong>perekat dan pemersatu bangsa</strong> (UU No. 5/2014). Sikap yang harus diambil: proaktif mengklarifikasi hoaks, mengedepankan dialog lintas keyakinan, melaporkan potensi ancaman ke atasan secara prosedural, dan menolak doktrin intoleran di lingkungan kerja.</p>
+        `,
+        quiz: {
+          q: "Langkah terbaik seorang aparatur negara dalam menangkal penyebaran narasi radikalisme dan hoaks bernuansa SARA di media sosial adalah....",
+          options: [
+            "Menghapus akun media sosial secara permanen",
+            "Menyebarkan konten positif, memverifikasi fakta dari sumber resmi, dan mengedukasi masyarakat secara santun",
+            "Menyerang balik dengan kata-kata emosional",
+            "Membiarkannya karena bukan urusan pribadi kedinasan"
+          ],
+          correct: 1,
+          explanation: "Menyebarkan narasi perdamaian, menyaring informasi secara kritis, dan mengedukasi dengan santun adalah peran aktif ASN sebagai perekat persatuan bangsa."
+        }
+      },
+      {
+        id: "tiu-verbal-trik",
+        category: "TIU",
+        title: "Modul 8: Strategi Jitu TIU Verbal (Sinonim, Antonim, Analogi, & Silogisme)",
+        readTime: "8 menit",
+        content: `
+          <h4 class="font-bold text-slate-900 text-base mb-2">1. Trik Menaklukkan Tes Sinonim & Antonim</h4>
+          <p>• <strong>Jangan terjebak bunyi mirip:</strong> Pilihan jawaban yang bunyinya paling mirip dengan soal hampir selalu merupakan pengecoh (distractor)!<br>
+          • <strong>Kembalikan ke kata dasar/bahasa asing:</strong> Misalnya kata <em>mortalitas</em> berasal dari <em>mortality</em> (kematian), <em>akselerasi</em> dari <em>acceleration</em> (percepatan).<br>
+          • <strong>Pada tes Antonim:</strong> Ingat selalu bahwa yang dicari adalah <em>lawan kata</em>! Soal antonim sering menyematkan sinonim di pilihan A/B untuk menjebak peserta yang tergesa-gesa.</p>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">2. Rumus Analogi (Padanan Hubungan Kata)</h4>
+          <p>Buat kalimat penghubung spesifik antara Kata 1 dan Kata 2, lalu terapkan pola yang sama persis dari kiri ke kanan. Hubungan umum: <em>Alat : Fungsi, Sebab : Akibat, Bagian : Kesatuan, Tempat : Objek, Bahan : Produk</em>.</p>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">3. Tiga Kaidah Penarikan Kesimpulan (Silogisme)</h4>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>Modus Ponens:</strong> [p &rarr; q, p] &rarr; Kesimpulan: <strong>q</strong>.</li>
+            <li><strong>Modus Tollens:</strong> [p &rarr; q, ~q] &rarr; Kesimpulan: <strong>~p</strong>.</li>
+            <li><strong>Silogisme Hipotesis:</strong> [p &rarr; q, q &rarr; r] &rarr; Kesimpulan: <strong>p &rarr; r</strong>.</li>
+            <li><strong>Aturan Kuantor:</strong> Jika terdapat premis partikular (<em>sebagian / beberapa / ada</em>), maka kesimpulan wajib partikular. Jika ada satu premis negatif (<em>tidak / bukan</em>), kesimpulan wajib bernilai negatif.</li>
+          </ul>
+        `,
+        quiz: {
+          q: "Semua ilmuwan senang membaca. Sebagian dosen adalah ilmuwan. Kesimpulan yang sah adalah....",
+          options: [
+            "Semua dosen senang membaca",
+            "Sebagian dosen senang membaca",
+            "Semua yang senang membaca adalah dosen",
+            "Dosen tidak senang membaca"
+          ],
+          correct: 1,
+          explanation: "Karena ada premis partikular 'sebagian dosen adalah ilmuwan', maka kesimpulan sah wajib partikular: Sebagian dosen senang membaca."
+        }
+      },
+      {
+        id: "tiu-numerik-aljabar",
+        category: "TIU",
+        title: "Modul 9: Trik Cepat Aritmetika Sosial, Aljabar, Deret & Perbandingan",
+        readTime: "9 menit",
+        content: `
+          <h4 class="font-bold text-slate-900 text-base mb-2">1. Aritmetika Sosial & Persentase</h4>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>Untung & Rugi:</strong> Untung = Jual - Beli; %Untung = (Untung / Beli) × 100%.</li>
+            <li><strong>Bruto, Neto, Tara:</strong> Bruto (kotor) = Neto (bersih) + Tara (kemasan). %Tara dihitung dari Bruto.</li>
+            <li><strong>Bunga Tunggal Bank:</strong> Bunga = Modal × Persen Bunga × Waktu.</li>
+          </ul>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">2. Perbandingan Senilai vs Berbalik Nilai</h4>
+          <p>• <strong>Senilai:</strong> Nilai A naik &rarr; B ikut naik (jarak tempuh vs bensin). Rumus: A1 / B1 = A2 / B2.<br>
+          • <strong>Berbalik Nilai:</strong> Nilai A naik &rarr; B malah turun (jumlah pekerja vs lama hari pengerjaan, kecepatan vs waktu tempuh). Rumus: A1 × B1 = A2 × B2.</p>
+
+          <h4 class="font-bold text-slate-900 text-base mt-4 mb-2">3. Trik Hitung Cepat & Deret Angka</h4>
+          <p>• Gunakan bentuk aljabar: $a^2 - b^2 = (a-b)(a+b)$. Misal: $65^2 - 35^2 = (65-35)(65+35) = 30 \times 100 = 3.000$.<br>
+          • <strong>Pola Deret:</strong> Perhatikan selisih tetap (aritmetika), rasio (geometri), selisih bertingkat, barisan Fibonacci (jumlah 2 suku sebelumnya), atau deret larik berseling ganjil-genap.</p>
+        `,
+        quiz: {
+          q: "Suatu pekerjaan renovasi gedung dapat diselesaikan oleh 15 orang pekerja dalam 24 hari. Jika renovasi ingin diselesaikan dalam 18 hari, berapa jumlah total pekerja yang dibutuhkan?",
+          options: ["18 orang", "20 orang", "22 orang", "25 orang"],
+          correct: 1,
+          explanation: "Perbandingan berbalik nilai: 15 × 24 = P2 × 18 &rarr; 360 = 18 P2 &rarr; P2 = 20 orang pekerja."
+        }
+      },
+      {
+        id: "tkp-mastery",
+        category: "TKP",
+        title: "Modul 10: Mindset Skor 5 Karakteristik Pribadi (Pelayanan, Jejaring, TIK & Profesionalisme)",
+        readTime: "8 menit",
+        content: `
+          <h4 class="font-bold text-slate-900 text-base mb-2">1. Formula Jawaban Nilai 5 TKP</h4>
+          <p>TKP tidak memiliki jawaban salah bernilai 0 (skala nilai 1 sampai 5). Kunci mendapatkan skor 5 adalah memilih opsi jawaban yang paling mencerminkan <strong>profil ideal Aparatur Sipil Negara</strong>:</p>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>Pelayanan Publik (Skor 5):</strong> Responsif, ramah, menomorsatukan kepuasan pemohon layanan dengan tetap mematuhi SOP resmi. Mengutamakan lansia/ibu hamil tanpa menimbulkan kekacauan antrean.</li>
+            <li><strong>Jejaring Kerja (Skor 5):</strong> Mau mendengarkan pendapat orang lain, kolaboratif, tidak memaksakan kehendak, dan membangun sinergi tim lintas instansi.</li>
+            <li><strong>Teknologi Informasi (Skor 5):</strong> Adaptif terhadap sistem digital kantor yang baru, mau belajar mandiri, dan sigap mendampingi rekan senior yang kesulitan.</li>
+            <li><strong>Profesionalisme & Integritas (Skor 5):</strong> Menyelesaikan tugas sebelum batas waktu (tuntas), memisahkan urusan dinas dan pribadi, serta menolak gratifikasi/suap secara tegas dan beretika.</li>
+          </ul>
+        `,
+        quiz: {
+          q: "Saat Anda sedang melayani masyarakat di loket kantor, seorang pemohon komplain dengan nada tinggi karena merasa sistem online instansi lambat. Respon paling tepat bernilai bobot tertinggi adalah....",
+          options: [
+            "Membalas dengan suara keras agar pemohon sadar akan sopan santun",
+            "Mendengarkan keluhannya dengan tenang, mencatat inti masalah, meminta maaf atas ketidaknyamanan, dan segera mengecek solusinya sesuai prosedur dinas",
+            "Menutup loket dan meminta petugas satpam mengusir pemohon",
+            "Mendiamkannya karena menganggap masyarakat memang sering mengeluh"
+          ],
+          correct: 1,
+          explanation: "Mendengarkan secara tenang dan empatik, mencatat keluhan, dan menyelesaikan masalah secara prosedural adalah ciri pelayanan publik prima (skor 5)."
+        }
+      }
+    ];
+
+    /* ========================================================
+       DATABASE BANK SOAL KOMPREHENSIF (EKSTRAKSI LENGKAP DARI 4 PDF)
+       Lengkap dengan Pembahasan Detail & Mudah Dipahami
+       ======================================================== */
+    const MASTER_QUESTIONS = [
+  {
+    "id": 1,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Membina persatuan dan kesatuan dihubungkan dengan semboyan Bhinneka Tunggal Ika mengandung makna bahwa ....",
+    "options": [
+      "a. Dalam bergaul harus dapat menyesuaikan diri",
+      "b. Kebudayaan daerah harus terus dilestarikan",
+      "c. Dalam pergaulan tidak boleh membedakan suku",
+      "d. Kebudayaan masyarakat tidak tergantikan budaya lain",
+      "e. Keanekaragaman tak mungkin dipersatukan"
+    ],
+    "explanation": "Secara harfiah Bhinneka Tunggal Ika bermakna berbeda-beda tetapi pada hakikatnya bangsa Indonesia tetap satu kesatuan. Semboyan ini digunakan untuk menggambarkan persatuan bangsa tanpa membedakan suku, agama, ras, dan antargolongan.",
+    "correct": 2
+  },
+  {
+    "id": 2,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Pak Suyatno adalah orang yang sombong. Ia selalu menilai orang lain hanya dari kekayaan dan kedudukannya. Sikap Pak Suyatno bertentangan dengan Pancasila sila ke ....",
+    "options": [
+      "a. Ketuhanan Yang Maha Esa",
+      "b. Kemanusiaan yang adil dan beradab",
+      "c. Persatuan Indonesia",
+      "d. Kerakyatan yang dipimpin oleh hikmat kebijaksanaan dalam permusyawaratan perwakilan",
+      "e. Keadilan bagi seluruh rakyat Indonesia"
+    ],
+    "explanation": "Sifat sombong dan memandang rendah martabat orang lain bertentangan dengan Sila ke-2 (Kemanusiaan yang Adil dan Beradab), yang mewajibkan pengakuan persamaan harkat, martabat, dan hak asasi setiap manusia.",
+    "correct": 1
+  },
+  {
+    "id": 3,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Pembangunan nasional tidak boleh bersifat pragmatis, hal ini mengandung arti bahwa ....",
+    "options": [
+      "a. Pembangunan tidak hanya mementingkan tindakan nyata dan mengabaikan pertimbangan etis",
+      "b. Pembangunan tidak boleh secara mutlak melayani ideologi tertentu dan mengabaikan manusia nyata",
+      "c. Pembangunan tidak boleh mengorbankan manusia nyata melainkan menghormati harkat dan martabat bangsa",
+      "d. Pembangunan melibatkan masyarakat sebagai tujuan pembangunan keputusan yang menyangkut kebutuhan mereka",
+      "e. Pembangunan mengutamakan mereka yang paling lemah untuk menghapuskan kemiskinan struktural"
+    ],
+    "explanation": "Pancasila sebagai paradigma pembangunan menegaskan bahwa proses pembangunan tidak boleh sekadar mengejar hasil materiil sesaat (pragmatis) dengan mengabaikan norma moral dan pertimbangan etika luhur.",
+    "correct": 0
+  },
+  {
+    "id": 4,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Pembangunan yang dilaksanakan mengacu pada standar nilai-nilai Pancasila merupakan maksud dari kedudukan Pancasila sebagai ....",
+    "options": [
+      "a. Pancasila sebagai ideologi terbuka",
+      "b. Pancasila sebagai ideologi tertutup",
+      "c. Pancasila sebagai nilai instrumental",
+      "d. Pancasila sebagai dasar negara",
+      "e. Pancasila sebagai paradigma pembangunan"
+    ],
+    "explanation": "Pancasila sebagai paradigma pembangunan berarti nilai-nilai dasar Pancasila secara normatif menjadi dasar, kerangka acuan, dan tolok ukur segenap aspek pembangunan nasional.",
+    "correct": 4
+  },
+  {
+    "id": 5,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Berikut ini yang termasuk dimensi realitas Sila ke-3 Pancasila, KECUALI ....",
+    "options": [
+      "a. Menghindari sikap chauvinisme dan primordialisme secara tepat",
+      "b. Memajukan pergaulan demi kemajuan bangsa",
+      "c. Membina hubungan baik dengan semua unsur bangsa",
+      "d. Mengembangkan sikap saling tenggang rasa dan tepa selira",
+      "e. Rela berkorban demi kepentingan bangsa dan negara"
+    ],
+    "explanation": "Dimensi realitas sila ke-3 mencerminkan persatuan bangsa. Sikap saling tenggang rasa dan tepa selira merupakan butir pengamalan Sila ke-2 (Kemanusiaan yang Adil dan Beradab).",
+    "correct": 3
+  },
+  {
+    "id": 6,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Mengembangkan sikap bahwa bangsa Indonesia merupakan bagian dari seluruh umat manusia merupakan perwujudan pengamalan Pancasila sila ke ....",
+    "options": [
+      "a. Pertama",
+      "b. Kedua",
+      "c. Ketiga",
+      "d. Keempat",
+      "e. Kelima"
+    ],
+    "explanation": "Salah satu butir pengamalan sila ke-2 adalah bangsa Indonesia merasa dirinya sebagai bagian dari seluruh umat manusia, oleh karena itu dikembangkan sikap hormat menghormati dan bekerja sama dengan bangsa lain.",
+    "correct": 1
+  },
+  {
+    "id": 7,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Pancasila sebagai paradigma pembangunan politik harus mampu ....",
+    "options": [
+      "a. Menjadikan rakyat sebagai subjek politik, bukan objek politik",
+      "b. Menjadi sumber dari segala sumber hukum",
+      "c. Pengontrol atas kekuasaan yang absolut",
+      "d. Pedoman hidup berkebangsaan",
+      "e. Memberi perlindungan hak asasi bagi rakyat"
+    ],
+    "explanation": "Pancasila sebagai paradigma pembangunan politik menuntut agar sistem politik menempatkan rakyat sebagai pemegang kedaulatan tertinggi (subjek politik), bukan sekadar sasaran kekuasaan.",
+    "correct": 0
+  },
+  {
+    "id": 8,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Salah satu bentuk pengamalan Sila ke-4 Pancasila di bawah ini adalah ....",
+    "options": [
+      "a. Kita tidak boleh memaksakan kehendak kita kepada orang lain",
+      "b. Mengembangkan sikap hormat menghormati dan bekerjasama dengan bangsa lain",
+      "c. Menjunjung tinggi Hak Asasi Manusia",
+      "d. Menyadari bahwa kita mempunyai hak dan kewajiban yang sama",
+      "e. Mengembangkan sikap saling mencintai sesama manusia"
+    ],
+    "explanation": "Sila ke-4 menekankan musyawarah mufakat di mana setiap orang tidak boleh memaksakan kehendak pribadinya kepada orang lain dan menghormati setiap keputusan bersama.",
+    "correct": 0
+  },
+  {
+    "id": 9,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Rumusan dan susunan Pancasila yang sah dan benar secara yuridis konstitusional tercantum dalam ....",
+    "options": [
+      "a. Pidato Moh. Yamin tanggal 29 Mei 1945",
+      "b. Piagam Jakarta 22 Juni 1945",
+      "c. Pidato Bung Karno tanggal 1 Juni 1945",
+      "d. Pembukaan UUD 1945 alinea keempat",
+      "e. Mukadimah Konstitusi Sementara RIS"
+    ],
+    "explanation": "Rumusan Pancasila yang sah dan resmi mengikat secara hukum tercantum dalam Pembukaan UUD 1945 alinea keempat yang disahkan oleh PPKI pada tanggal 18 Agustus 1945 (ditegaskan kembali melalui Inpres No. 12/1968).",
+    "correct": 3
+  },
+  {
+    "id": 10,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Pancasila adalah ideologi yang terbuka. Batas-batas keterbukaan ideologi Pancasila tersebut adalah sebagai berikut, KECUALI ....",
+    "options": [
+      "a. Menekankan pada stabilitas nasional yang sehat dan dinamis",
+      "b. Penciptaan norma baru tidak perlu melalui konsensus bersama",
+      "c. Larangan terhadap ideologi Marxisme, Leninisme, dan Komunisme",
+      "d. Larangan terhadap pandangan ekstrem yang meresahkan masyarakat",
+      "e. Mencegah berkembangnya paham dan ideologi liberalisme"
+    ],
+    "explanation": "Penciptaan norma baru dalam ideologi terbuka Pancasila harus selalu melalui konsensus bersama seluruh elemen masyarakat, bukan tanpa konsensus.",
+    "correct": 1
+  },
+  {
+    "id": 11,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Pancasila digunakan sebagai dasar untuk mengatur penyelenggaraan aparatur negara. Hal ini sesuai dengan kedudukan Pancasila sebagai ....",
+    "options": [
+      "a. Pandangan hidup bangsa",
+      "b. Moral pembangunan bangsa",
+      "c. Perjanjian luhur bangsa",
+      "d. Jiwa dan kepribadian bangsa",
+      "e. Dasar negara"
+    ],
+    "explanation": "Pancasila sebagai Dasar Negara berfungsi sebagai landasan yuridis dan filosofis dalam penyelenggaraan tata negara, kelembagaan pemerintahan, dan hukum di Indonesia.",
+    "correct": 4
+  },
+  {
+    "id": 12,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Nilai-nilai yang terkandung dalam Pancasila menurut Prof. Notonegoro dikelompokkan menjadi tiga nilai utama, yaitu ....",
+    "options": [
+      "a. Nilai materiil, nilai vital, dan nilai kerohanian",
+      "b. Nilai estetika, nilai etika, dan nilai logika",
+      "c. Nilai individual, nilai sosial, dan nilai universal",
+      "d. Nilai ekonomis, nilai religius, dan nilai politis",
+      "e. Nilai dasar, nilai instrumental, dan nilai praktis"
+    ],
+    "explanation": "Prof. Notonegoro membagi nilai menjadi tiga: Nilai Materiil (segala yang berguna bagi jasmani), Nilai Vital (berguna untuk aktivitas manusia), dan Nilai Kerohanian (kebenaran, keindahan, kebaikan, dan religius).",
+    "correct": 0
+  },
+  {
+    "id": 13,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Sidang pertama BPUPKI mengkaji calon dasar negara. Pada tanggal 1 Juni 1945, Ir. Soekarno mengusulkan rumusan dasar negara dengan urutan ....",
+    "options": [
+      "a. Nasionalisme (Kebangsaan), Internasionalisme (Kemanusiaan), Mufakat/Demokrasi, Kesejahteraan Sosial, dan Ketuhanan yang Berkebudayaan",
+      "b. Ketuhanan Yang Maha Esa, Kebangsaan, Kemanusiaan, Kerakyatan, Keadilan Sosial",
+      "c. Peri Kebangsaan, Peri Kemanusiaan, Peri Ketuhanan, Peri Kerakyatan, Kesejahteraan Rakyat",
+      "d. Persatuan, Kekeluargaan, Keseimbangan Lahir Batin, Musyawarah, Keadilan Rakyat",
+      "e. Kesejahteraan Sosial, Internasionalisme, Nasionalisme, Demokrasi, Ketuhanan"
+    ],
+    "explanation": "Pada 1 Juni 1945, Soekarno mengusulkan 5 sila berurutan: 1. Kebangsaan Indonesia, 2. Internasionalisme atau Peri-Kemanusiaan, 3. Mufakat atau Demokrasi, 4. Kesejahteraan Sosial, 5. Ketuhanan yang Berkebudayaan.",
+    "correct": 0
+  },
+  {
+    "id": 14,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Berdasarkan Tap MPRS No. XX/MPRS/1966 dan UU No. 12 Tahun 2011, kedudukan Pancasila dalam hierarki norma hukum di Indonesia adalah sebagai ....",
+    "options": [
+      "a. Hukum positif tertinggi yang dapat diamandemen",
+      "b. Sumber dari segala sumber hukum negara",
+      "c. Hukum pelaksana undang-undang",
+      "d. Konstitusi tertulis tidak resmi",
+      "e. Dokumen politik pemerintahan"
+    ],
+    "explanation": "Pancasila berkedudukan sebagai sumber dari segala sumber hukum negara (Staatsfundamentalnorm), yang menjiwai seluruh peraturan perundang-undangan di Indonesia.",
+    "correct": 1
+  },
+  {
+    "id": 15,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Toleransi antarumat beragama dan tidak memaksakan agama kepada orang lain merupakan butir pengamalan Pancasila sila ....",
+    "options": [
+      "a. Pertama",
+      "b. Kedua",
+      "c. Ketiga",
+      "d. Keempat",
+      "e. Kelima"
+    ],
+    "explanation": "Toleransi antarumat beragama dan larangan memaksakan agama/kepercayaan kepada orang lain tercantum dalam butir pengamalan Sila ke-1 (Ketuhanan Yang Maha Esa).",
+    "correct": 0
+  },
+  {
+    "id": 16,
+    "type": "TWK",
+    "category": "pancasila",
+    "question": "Kata 'beradab' dalam sila Kemanusiaan yang Adil dan Beradab mengandung makna bahwa ....",
+    "options": [
+      "a. Manusia Indonesia tunduk mutlak pada kekuasaan penguasa",
+      "b. Setiap individu memiliki harkat, martabat luhur, dan budi pekerti yang membedakannya dari makhluk lain",
+      "c. Warga negara mengutamakan kepentingan pribadi di atas negara",
+      "d. Pembangunan fisik material lebih utama daripada rohani",
+      "e. Hukum adat dapat mengesampingkan norma hukum positif"
+    ],
+    "explanation": "Beradab bermakna pengakuan manusia sebagai makhluk ciptaan Tuhan yang memiliki akal budi, adab susila, sopan santun, dan moralitas luhur.",
+    "correct": 1
+  },
+  {
+    "id": 17,
+    "type": "TWK",
+    "category": "uud",
+    "question": "Menurut alinea ketiga Pembukaan UUD 1945, perjuangan kemerdekaan merupakan tindakan yang diberkati oleh Allah Yang Mahakuasa karena ....",
+    "options": [
+      "a. Kehidupan kebangsaan yang bebas merupakan keinginan luhur",
+      "b. Bangsa Indonesia adalah bangsa yang religius",
+      "c. Kemerdekaan itu sudah lama diperjuangkan",
+      "d. Banyak pengorbanan yang harus diberikan untuk mendapatkan kemerdekaan",
+      "e. Kemerdekaan karunia Allah yang tidak perlu diperjuangkan"
+    ],
+    "explanation": "Sesuai Pembukaan UUD 1945 Alinea III: 'Atas berkat rahmat Allah Yang Maha Kuasa dan dengan didorongkan oleh keinginan luhur...'. Hal ini membuktikan pengakuan religiusitas bangsa Indonesia yang meyakini kekuasaan Tuhan YME.",
+    "correct": 1
+  },
+  {
+    "id": 18,
+    "type": "TWK",
+    "category": "uud",
+    "question": "Menurut UUD 1945 hasil amandemen, jika Presiden dan Wakil Presiden mangkat, berhenti, atau diberhentikan secara bersamaan, pelaksana tugas kepresidenan dipegang oleh triumvirat menteri, yaitu ....",
+    "options": [
+      "a. Menteri Pertahanan, Menko Polhukam, dan Panglima TNI",
+      "b. Menteri Luar Negeri, Menteri Dalam Negeri, dan Menteri Pertahanan",
+      "c. Ketua MPR, Ketua DPR, dan Ketua DPD",
+      "d. Menteri Dalam Negeri, Menteri Keuangan, dan Kapolri",
+      "e. Menko Polhukam, Menko Perekonomian, dan Menko PMK"
+    ],
+    "explanation": "Pasal 8 ayat (3) UUD 1945 menyatakan pelaksana tugas kepresidenan adalah Menteri Luar Negeri, Menteri Dalam Negeri, dan Menteri Pertahanan secara bersama-sama.",
+    "correct": 1
+  },
+  {
+    "id": 19,
+    "type": "TWK",
+    "category": "uud",
+    "question": "Berdasarkan Pasal 33 ayat (1) UUD 1945, perekonomian Indonesia disusun sebagai usaha bersama berdasar atas asas ....",
+    "options": [
+      "a. Kemandirian nasional",
+      "b. Persaingan pasar bebas",
+      "c. Kekeluargaan",
+      "d. Kemitraan permodalan asing",
+      "e. Efisiensi perbankan"
+    ],
+    "explanation": "Pasal 33 ayat (1) UUD 1945 berbunyi: 'Perekonomian disusun sebagai usaha bersama berdasar atas asas kekeluargaan'.",
+    "correct": 2
+  },
+  {
+    "id": 20,
+    "type": "TWK",
+    "category": "uud",
+    "question": "Mahkamah Konstitusi dibentuk pertama kali di Indonesia berdasarkan amanat Perubahan Ketiga UUD 1945 dan disahkan melalui ....",
+    "options": [
+      "a. UU No. 24 Tahun 2003",
+      "b. UU No. 30 Tahun 2002",
+      "c. UU No. 32 Tahun 2004",
+      "d. UU No. 10 Tahun 2004",
+      "e. UU No. 5 Tahun 2014"
+    ],
+    "explanation": "MK dibentuk berdasarkan Undang-Undang Nomor 24 Tahun 2003 tentang Mahkamah Konstitusi.",
+    "correct": 0
+  },
+  {
+    "id": 21,
+    "type": "TWK",
+    "category": "uud",
+    "question": "Negara menghormati dan memelihara bahasa daerah sebagai kekayaan budaya nasional. Hal ini tercantum dalam UUD 1945 Pasal ....",
+    "options": [
+      "a. Pasal 23",
+      "b. Pasal 24",
+      "c. Pasal 27",
+      "d. Pasal 31",
+      "e. Pasal 32 ayat (2)"
+    ],
+    "explanation": "Pasal 32 ayat (2) UUD 1945 menegaskan: 'Negara menghormati dan memelihara bahasa daerah sebagai kekayaan budaya nasional'.",
+    "correct": 4
+  },
+  {
+    "id": 22,
+    "type": "TWK",
+    "category": "uud",
+    "question": "Berapa kali UUD 1945 telah diamandemen pada era reformasi?",
+    "options": [
+      "a. 1 kali",
+      "b. 2 kali",
+      "c. 3 kali",
+      "d. 4 kali",
+      "e. 5 kali"
+    ],
+    "explanation": "UUD 1945 diamandemen 4 kali: Sidang Umum MPR 1999 (I), Sidang Tahunan 2000 (II), Sidang Tahunan 2001 (III), dan Sidang Tahunan 2002 (IV).",
+    "correct": 3
+  },
+  {
+    "id": 23,
+    "type": "TWK",
+    "category": "uud",
+    "question": "Ketentuan pembatasan masa jabatan Presiden dan Wakil Presiden maksimal dua kali masa jabatan (periode) ditetapkan dalam Amandemen Pertama pada Pasal ....",
+    "options": [
+      "a. Pasal 5 ayat (1)",
+      "b. Pasal 7",
+      "c. Pasal 9 ayat (1)",
+      "d. Pasal 13 ayat (2)",
+      "e. Pasal 17 ayat (2)"
+    ],
+    "explanation": "Pasal 7 UUD 1945 hasil amandemen ke-1 berbunyi: 'Presiden dan Wakil Presiden memegang jabatan selama lima tahun, dan sesudahnya dapat dipilih kembali dalam jabatan yang sama, hanya untuk satu kali masa jabatan'.",
+    "correct": 1
+  },
+  {
+    "id": 24,
+    "type": "TWK",
+    "category": "uud",
+    "question": "Ketentuan tentang Hak Asasi Manusia tercantum secara lengkap dan terperinci dalam UUD 1945 hasil amandemen pada Bab ....",
+    "options": [
+      "a. Bab IX Pasal 24",
+      "b. Bab XA Pasal 28A sampai 28J",
+      "c. Bab XII Pasal 30",
+      "d. Bab XIII Pasal 31",
+      "e. Bab XIV Pasal 33"
+    ],
+    "explanation": "Bab XA Pasal 28A sampai 28J merupakan piagam hak asasi manusia terlengkap hasil Amandemen Kedua UUD 1945 pada tahun 2000.",
+    "correct": 1
+  },
+  {
+    "id": 25,
+    "type": "TWK",
+    "category": "uud",
+    "question": "Menurut Pasal 14 ayat (1) UUD 1945, Presiden memberikan grasi dan rehabilitasi dengan memperhatikan pertimbangan dari ....",
+    "options": [
+      "a. Dewan Perwakilan Rakyat",
+      "b. Mahkamah Agung",
+      "c. Komisi Yudisial",
+      "d. Menteri Hukum dan HAM",
+      "e. Mahkamah Konstitusi"
+    ],
+    "explanation": "Pasal 14 ayat (1) menyatakan Presiden memberikan grasi dan rehabilitasi dengan memperhatikan pertimbangan Mahkamah Agung (MA).",
+    "correct": 1
+  },
+  {
+    "id": 26,
+    "type": "TWK",
+    "category": "uud",
+    "question": "Berdasarkan Pasal 37 ayat (5) UUD 1945, hal yang secara tegas TIDAK dapat dilakukan perubahan oleh MPR adalah ....",
+    "options": [
+      "a. Sistem multipartai pemilu",
+      "b. Bentuk Negara Kesatuan Republik Indonesia (NKRI)",
+      "c. Jumlah kementerian negara",
+      "d. Kewenangan Dewan Perwakilan Daerah",
+      "e. Masa jabatan hakim Mahkamah Konstitusi"
+    ],
+    "explanation": "Pasal 37 ayat (5) menyatakan: 'Khusus mengenai bentuk Negara Kesatuan Republik Indonesia tidak dapat dilakukan perubahan'.",
+    "correct": 1
+  },
+  {
+    "id": 27,
+    "type": "TWK",
+    "category": "uud",
+    "question": "Pasal 31 ayat (4) UUD 1945 hasil Amandemen Keempat mewajibkan negara memprioritaskan anggaran pendidikan sekurang-kurangnya ....",
+    "options": [
+      "a. 10% dari APBN dan APBD",
+      "b. 15% dari APBN dan APBD",
+      "c. 20% dari APBN dan APBD",
+      "d. 25% dari APBN dan APBD",
+      "e. 30% dari APBN dan APBD"
+    ],
+    "explanation": "Pasal 31 ayat (4) menegaskan negara memprioritaskan anggaran pendidikan sekurang-kurangnya 20% dari APBN dan APBD untuk memenuhi kebutuhan penyelenggaraan pendidikan nasional.",
+    "correct": 2
+  },
+  {
+    "id": 28,
+    "type": "TWK",
+    "category": "tatanegara",
+    "question": "Interaksi masyarakat yang berorientasi ke atas, sangat mementingkan hubungan formal dan bersifat impersonal merupakan gambaran dari etos kebudayaan masyarakat ....",
+    "options": [
+      "a. Elite",
+      "b. Birokrat",
+      "c. Petani",
+      "d. Buruh",
+      "e. Tradisional"
+    ],
+    "explanation": "Etos kebudayaan masyarakat birokrat ditandai oleh hubungan kerja yang formal, hierarki vertikal ke atas, dan komunikasi kedinasan yang impersonal.",
+    "correct": 1
+  },
+  {
+    "id": 29,
+    "type": "TWK",
+    "category": "tatanegara",
+    "question": "Berdasarkan UUD 1945, setiap pemberian amnesti dan abolisi oleh Presiden harus dengan persetujuan / pertimbangan dari ....",
+    "options": [
+      "a. Menteri Pertahanan",
+      "b. Panglima TNI",
+      "c. Panglima Polri",
+      "d. Dewan Perwakilan Rakyat (DPR)",
+      "e. Menteri Hukum dan HAM"
+    ],
+    "explanation": "Pasal 14 ayat (2) UUD 1945 menyatakan Presiden memberikan amnesti dan abolisi dengan memperhatikan pertimbangan Dewan Perwakilan Rakyat (DPR).",
+    "correct": 3
+  },
+  {
+    "id": 30,
+    "type": "TWK",
+    "category": "tatanegara",
+    "question": "Dalam hierarki tata urutan perundang-undangan di Indonesia menurut UU No. 12 Tahun 2011, peraturan yang menempati posisi terbawah adalah ....",
+    "options": [
+      "a. Peraturan Pemerintah Pengganti Undang-Undang (Perppu)",
+      "b. Peraturan Daerah (Perda) Kabupaten/Kota",
+      "c. Peraturan Presiden (Perpres)",
+      "d. Peraturan Pemerintah (PP)",
+      "e. Ketetapan MPR"
+    ],
+    "explanation": "Pasal 7 UU No. 12 Tahun 2011 menempatkan Perda Kabupaten/Kota pada urutan terbawah hierarki peraturan perundang-undangan nasional.",
+    "correct": 1
+  },
+  {
+    "id": 31,
+    "type": "TWK",
+    "category": "tatanegara",
+    "question": "Menurut UU No. 32 Tahun 2004 jo. UU No. 23 Tahun 2014, syarat fisik kewilayahan untuk pembentukan sebuah provinsi baru paling sedikit harus memiliki ....",
+    "options": [
+      "a. 5 (lima) kabupaten/kota",
+      "b. 7 (tujuh) kabupaten/kota",
+      "c. 10 (sepuluh) kabupaten/kota",
+      "d. 1/2 jumlah kabupaten/kota provinsi induk",
+      "e. 2/3 jumlah kabupaten/kota provinsi induk"
+    ],
+    "explanation": "Syarat fisik administratif pembentukan provinsi baru minimal meliputi 5 kabupaten/kota, sedangkan untuk pembentukan kabupaten minimal 5 kecamatan dan kota minimal 4 kecamatan.",
+    "correct": 0
+  },
+  {
+    "id": 32,
+    "type": "TWK",
+    "category": "tatanegara",
+    "question": "Sumber hukum berupa keputusan hakim terdahulu yang dijadikan dasar putusan oleh hakim lain dalam mengadili perkara serupa disebut ....",
+    "options": [
+      "a. Statute",
+      "b. Custom",
+      "c. Yurisprudensi",
+      "d. Treaty",
+      "e. Doktrin hukum"
+    ],
+    "explanation": "Yurisprudensi adalah putusan hakim terdahulu yang berkekuatan hukum tetap yang dijadikan rujukan bagi hakim lain dalam memutus perkara yang sama.",
+    "correct": 2
+  },
+  {
+    "id": 33,
+    "type": "TWK",
+    "category": "tatanegara",
+    "question": "Dalam praktik ketatanegaraan Indonesia, ajaran Trias Politika dari Montesquieu tidak diterapkan secara pemisahan mutlak, melainkan menganut prinsip ....",
+    "options": [
+      "a. Monarki parlementer absolut",
+      "b. Pembagian kekuasaan (distribution of power) dengan mekanisme checks and balances",
+      "c. Pemusatan wewenang pada mandataris tunggal MPR",
+      "d. Dominasi lembaga yudikatif tanpa pengawasan eksekutif",
+      "e. Penyatuan fungsi legislatif ke tangan presiden"
+    ],
+    "explanation": "Indonesia menganut pembagian kekuasaan (distribution of power) antarcabang eksekutif, legislatif, dan yudikatif yang saling mengawasi dan mengimbangi (checks and balances).",
+    "correct": 1
+  },
+  {
+    "id": 34,
+    "type": "TWK",
+    "category": "tatanegara",
+    "question": "Berdasarkan UU No. 23 Tahun 2014, urusan pemerintahan yang sepenuhnya tetap menjadi kewenangan absolut pemerintah pusat adalah ....",
+    "options": [
+      "a. Pendidikan dasar dan menengah",
+      "b. Pelayanan kesehatan masyarakat dan sosial",
+      "c. Politik luar negeri, pertahanan, keamanan, yustisi, moneter fiskal nasional, dan agama",
+      "d. Pengelolaan tata ruang wilayah kabupaten",
+      "e. Pengelolaan pasar tradisional dan retribusi daerah"
+    ],
+    "explanation": "Ada 6 urusan absolut yang tidak diserahkan ke daerah otonom: Politik Luar Negeri, Pertahanan, Keamanan, Yustisi, Moneter/Fiskal Nasional, dan Agama.",
+    "correct": 2
+  },
+  {
+    "id": 35,
+    "type": "TWK",
+    "category": "tatanegara",
+    "question": "Lembaga negara yang berwenang memutus pembubaran partai politik dan memutus sengketa hasil pemilihan umum adalah ....",
+    "options": [
+      "a. Mahkamah Agung",
+      "b. Komisi Yudisial",
+      "c. Mahkamah Konstitusi",
+      "d. Komisi Pemilihan Umum",
+      "e. Dewan Perwakilan Rakyat"
+    ],
+    "explanation": "Pasal 24C ayat (1) UUD 1945 menegaskan MK berwenang mengadili uji materi UU terhadap UUD, sengketa kewenangan lembaga negara, pembubaran parpol, dan perselisihan hasil pemilu.",
+    "correct": 2
+  },
+  {
+    "id": 36,
+    "type": "TWK",
+    "category": "tatanegara",
+    "question": "Anggota Komisi Yudisial diangkat dan diberhentikan oleh Presiden dengan persetujuan dari lembaga ....",
+    "options": [
+      "a. Mahkamah Agung",
+      "b. Dewan Perwakilan Rakyat",
+      "c. Mahkamah Konstitusi",
+      "d. Majelis Permusyawaratan Rakyat",
+      "e. Kejaksaan Agung"
+    ],
+    "explanation": "Pasal 24B ayat (3) UUD 1945 menyatakan anggota Komisi Yudisial diangkat dan diberhentikan oleh Presiden dengan persetujuan DPR.",
+    "correct": 1
+  },
+  {
+    "id": 37,
+    "type": "TWK",
+    "category": "tatanegara",
+    "question": "Berdasarkan Konvensi Montevideo 1933, empat unsur konstitutif (pokok) mutlak berdirinya suatu negara adalah ....",
+    "options": [
+      "a. Rakyat, wilayah tertentu, pemerintah yang berdaulat, dan kesanggupan berhubungan dengan negara lain",
+      "b. Rakyat, undang-undang, mata uang, dan peradilan",
+      "c. Wilayah, tentara militer, partai politik, dan konstitusi",
+      "d. Pemerintah, gedung parlemen, bendera nasional, dan lagu kebangsaan",
+      "e. Penduduk, batas laut teritorial, kepolisian, dan pengakuan de jure"
+    ],
+    "explanation": "Konvensi Montevideo 1933 menetapkan 4 unsur konstitutif: 1. Penduduk tetap, 2. Wilayah tertentu, 3. Pemerintah berdaulat, dan 4. Kemampuan menjalin hubungan dengan negara lain.",
+    "correct": 0
+  },
+  {
+    "id": 38,
+    "type": "TWK",
+    "category": "sejarah",
+    "question": "Janji kemerdekaan bagi Indonesia di kemudian hari yang disampaikan Jepang pada 7 September 1944 diumumkan oleh ....",
+    "options": [
+      "a. Laksamana Maeda",
+      "b. Perdana Menteri Koiso",
+      "c. Ichikawa Taisho",
+      "d. Marsekal Terauchi",
+      "e. Kumakichi Harada"
+    ],
+    "explanation": "Perdana Menteri Kuniaki Koiso mengumumkan janji kemerdekaan bagi Indonesia di depan parlemen Jepang Teikoku Ginkai pada tanggal 7 September 1944.",
+    "correct": 1
+  },
+  {
+    "id": 39,
+    "type": "TWK",
+    "category": "sejarah",
+    "question": "Mewujudkan nasionalisme yang tinggi dari rakyat Indonesia yang lebih mengutamakan kepentingan nasional daripada kepentingan perorangan atau golongan merupakan ....",
+    "options": [
+      "a. Tujuan ketahanan nasional",
+      "b. Pengertian ketahanan nasional",
+      "c. Tujuan pembangunan nasional",
+      "d. Pengertian wawasan nusantara",
+      "e. Tujuan wawasan nusantara"
+    ],
+    "explanation": "Tujuan Wawasan Nusantara adalah mewujudkan nasionalisme yang tinggi di segala aspek kehidupan rakyat Indonesia demi kepentingan nasional bangsa dan negara.",
+    "correct": 4
+  },
+  {
+    "id": 40,
+    "type": "TWK",
+    "category": "sejarah",
+    "question": "Tokoh yang bersama Bung Karno dan Muhammad Yamin ikut melakukan pembicaraan terbatas mengenai Semboyan Bhinneka Tunggal Ika dalam sidang BPUPKI adalah ....",
+    "options": [
+      "a. I Gusti Bagus Sugriwa",
+      "b. Adam Malik",
+      "c. Sultan Hamid II",
+      "d. Ahmad Subardjo",
+      "e. Ki Hajar Dewantara"
+    ],
+    "explanation": "Pembicaraan terbatas perihal semboyan Bhinneka Tunggal Ika di sidang BPUPKI berlangsung antara Muhammad Yamin, Bung Karno, dan I Gusti Bagus Sugriwa.",
+    "correct": 0
+  },
+  {
+    "id": 41,
+    "type": "TWK",
+    "category": "sejarah",
+    "question": "Organisasi pergerakan pertama di Indonesia yang berorientasi politik nasional dan didirikan oleh Tiga Serangkai pada tahun 1912 adalah ....",
+    "options": [
+      "a. Budi Utomo",
+      "b. Sarekat Islam",
+      "c. Indische Partij",
+      "d. Perhimpunan Indonesia",
+      "e. Partai Nasional Indonesia"
+    ],
+    "explanation": "Indische Partij didirikan di Bandung pada 25 Desember 1912 oleh Tiga Serangkai: E.F.E. Douwes Dekker, Tjipto Mangoenkoesoemo, dan Suwardi Suryaningrat.",
+    "correct": 2
+  },
+  {
+    "id": 42,
+    "type": "TWK",
+    "category": "sejarah",
+    "question": "Peristiwa penculikan Ir. Soekarno dan Drs. Moh. Hatta ke Rengasdengklok pada 16 Agustus 1945 dilatarbelakangi oleh ....",
+    "options": [
+      "a. Penolakan Soekarno menandatangani Piagam Jakarta",
+      "b. Perbedaan pandangan antara golongan muda dan tua mengenai waktu dan independensi kemerdekaan tanpa campur tangan Jepang",
+      "c. Perintah penangkapan oleh tentara Sekutu yang sudah mendarat",
+      "d. Usulan pembubaran PPKI oleh pihak Belanda",
+      "e. Desakan tentara Jepang untuk membatalkan proklamasi"
+    ],
+    "explanation": "Golongan pemuda menghendaki proklamasi dilaksanakan secepatnya dengan kekuatan mandiri tanpa menunggu sidang PPKI yang dianggap bentukan Jepang.",
+    "correct": 1
+  },
+  {
+    "id": 43,
+    "type": "TWK",
+    "category": "sejarah",
+    "question": "Deklarasi Djuanda yang dicetuskan pada tanggal 13 Desember 1957 memiliki arti yang sangat krusial bagi kedaulatan wilayah Indonesia karena ....",
+    "options": [
+      "a. Membatasi perairan Indonesia hanya sejauh 3 mil dari pantai",
+      "b. Menjadikan laut antarpulau sebagai perairan pedalaman satu kesatuan wilayah NKRI dengan batas laut teritorial 12 mil",
+      "c. Menyerahkan kepulauan Irian Barat kepada PBB",
+      "d. Menghentikan konfrontasi bersenjata dengan Malaysia",
+      "e. Membentuk kawasan perdagangan bebas ASEAN"
+    ],
+    "explanation": "Deklarasi Djuanda 13 Desember 1957 menyatukan wilayah laut antarpulau menjadi kesatuan perairan pedalaman NKRI dengan lebar laut teritorial 12 mil laut.",
+    "correct": 1
+  },
+  {
+    "id": 44,
+    "type": "TWK",
+    "category": "sejarah",
+    "question": "Pada perundingan Linggarjati tahun 1946-1947, pihak Belanda secara de facto hanya mengakui wilayah kekuasaan Republik Indonesia meliputi ....",
+    "options": [
+      "a. Seluruh bekas wilayah Hindia Belanda",
+      "b. Jawa, Madura, dan Sumatera",
+      "c. Jawa dan Bali saja",
+      "d. Kalimantan dan Sulawesi",
+      "e. Maluku dan Papua"
+    ],
+    "explanation": "Dalam Perjanjian Linggarjati, Belanda hanya mengakui kekuasaan de facto Republik Indonesia atas Jawa, Madura, dan Sumatera.",
+    "correct": 1
+  },
+  {
+    "id": 45,
+    "type": "TWK",
+    "category": "sejarah",
+    "question": "Perjanjian Renville tanggal 17 Januari 1948 dilaksanakan di atas kapal USS Renville dan ditengahi oleh Komisi Tiga Negara (KTN) yang beranggotakan ....",
+    "options": [
+      "a. Amerika Serikat, Inggris, dan Belanda",
+      "b. Australia, Belgia, dan Amerika Serikat",
+      "c. Prancis, Uni Soviet, dan Tiongkok",
+      "d. India, Mesir, dan Australia",
+      "e. Filipina, Thailand, dan Malaysia"
+    ],
+    "explanation": "KTN terdiri atas Australia (dipilih oleh Indonesia), Belgia (dipilih oleh Belanda), dan Amerika Serikat (dipilih bersama sebagai penengah netral).",
+    "correct": 1
+  },
+  {
+    "id": 46,
+    "type": "TWK",
+    "category": "sejarah",
+    "question": "Organisasi pemuda pertama yang dibentuk pada masa pergerakan nasional yang didirikan oleh Dr. Soetomo dan mahasiswa STOVIA pada 20 Mei 1908 adalah ....",
+    "options": [
+      "a. Budi Utomo",
+      "b. Sarekat Islam",
+      "c. Trikoro Dharmo",
+      "d. Indische Partij",
+      "e. Jong Java"
+    ],
+    "explanation": "Budi Utomo didirikan pada 20 Mei 1908 di gedung STOVIA Jakarta atas gagasan Dr. Wahidin Sudirohusodo, yang kini diperingati sebagai Hari Kebangkitan Nasional.",
+    "correct": 0
+  },
+  {
+    "id": 47,
+    "type": "TWK",
+    "category": "sejarah",
+    "question": "Perang Puputan Margarana di Bali pada tanggal 20 November 1946 dipimpin oleh pahlawan nasional ....",
+    "options": [
+      "a. I Gusti Ketut Jelantik",
+      "b. Letkol I Gusti Ngurah Rai",
+      "c. Untung Surapati",
+      "d. Pangeran Antasari",
+      "e. Pattimura"
+    ],
+    "explanation": "Pertempuran Puputan Margarana dipimpin oleh Letkol I Gusti Ngurah Rai bersama pasukan Ciung Wanara bertarung hingga titik darah penghabisan melawan tentara Belanda.",
+    "correct": 1
+  },
+  {
+    "id": 48,
+    "type": "TWK",
+    "category": "sejarah",
+    "question": "Tiga perubahan naskah Proklamasi Kemerdekaan saat diketik oleh Sayuti Melik dari tulisan tangan Soekarno adalah ....",
+    "options": [
+      "a. Kata 'tempoh' diubah menjadi 'tempo', 'wakil-wakil bangsa Indonesia' diubah menjadi 'Atas nama bangsa Indonesia', dan penulisan penanggalan Djakarta",
+      "b. Penambahan nama Laksamana Maeda",
+      "c. Penghapusan kalimat pernyataan kemerdekaan",
+      "d. Penyebutan nama Kaisar Jepang di akhir naskah",
+      "e. Penambahan kalimat pembentukan tentara nasional"
+    ],
+    "explanation": "Sayuti Melik mengetik naskah proklamasi dengan mengubah kata 'tempoh' jadi 'tempo', 'wakil-wakil bangsa Indonesia' jadi 'Atas nama bangsa Indonesia', serta 'Djakarta 17-08-05' jadi 'Djakarta, hari 17 boelan 8 Tahoen 05'.",
+    "correct": 0
+  },
+  {
+    "id": 49,
+    "type": "TWK",
+    "category": "kebijakan",
+    "question": "Kebijakan pemotongan nilai uang (Sanering) yaitu memotong semua uang yang bernilai Rp2,50 ke atas hingga nilainya tinggal setengah terjadi saat Menteri Keuangan dijabat oleh ....",
+    "options": [
+      "a. Wilopo",
+      "b. Ali Sastroamidjojo",
+      "c. Burhanuddin Harahap",
+      "d. Syafruddin Prawiranegara",
+      "e. Sri Sultan Hamengkubuwono IX"
+    ],
+    "explanation": "Kebijakan Gunting Syafruddin diberlakukan pada 19 Maret 1950 oleh Menkeu Syafruddin Prawiranegara untuk memotong inflasi tinggi pasca perang.",
+    "correct": 3
+  },
+  {
+    "id": 50,
+    "type": "TWK",
+    "category": "kebijakan",
+    "question": "Kebijakan yang diambil oleh Bank Sentral untuk menaikkan cadangan kas minimum bank umum dan menaikkan suku bunga demi meredam inflasi disebut ....",
+    "options": [
+      "a. Easy Money Policy",
+      "b. Tight Money Policy",
+      "c. Kebijakan Fiskal Ekspansif",
+      "d. Subsidi Anggaran",
+      "e. Privatisasi"
+    ],
+    "explanation": "Tight Money Policy (Kebijakan Uang Ketat) bertujuan menyedot jumlah uang beredar dengan menaikkan suku bunga, menjual surat berharga, dan menaikkan rasio cadangan kas.",
+    "correct": 1
+  },
+  {
+    "id": 51,
+    "type": "TWK",
+    "category": "kebijakan",
+    "question": "Kebijakan pemerintah yang mengatur pos-pos penerimaan dan belanja negara dalam APBN guna memengaruhi perekonomian makro disebut ....",
+    "options": [
+      "a. Kebijakan moneter",
+      "b. Kebijakan fiskal",
+      "c. Kebijakan diskonto",
+      "d. Kebijakan pasar terbuka",
+      "e. Kebijakan devisa bebas"
+    ],
+    "explanation": "Kebijakan fiskal adalah kebijakan pengelolaan anggaran pendapatan dan belanja negara (pajak dan pengeluaran pemerintah) untuk stabilitas ekonomi.",
+    "correct": 1
+  },
+  {
+    "id": 52,
+    "type": "TWK",
+    "category": "kebijakan",
+    "question": "Asas penyelenggaraan pemerintahan yang mengutamakan keseimbangan antara hak dan kewajiban penyelenggara negara disebut asas ....",
+    "options": [
+      "a. Asas keterbukaan",
+      "b. Asas proporsionalitas",
+      "c. Asas profesionalitas",
+      "d. Asas akuntabilitas",
+      "e. Asas efisiensi"
+    ],
+    "explanation": "Asas proporsionalitas adalah asas yang mengutamakan keseimbangan antara hak dan kewajiban penyelenggara negara.",
+    "correct": 1
+  },
+  {
+    "id": 53,
+    "type": "TWK",
+    "category": "kebijakan",
+    "question": "Asas pemilu pada era reformasi yang menyempurnakan asas LUBER (Langsung, Umum, Bebas, Rahasia) dengan menambahkan prinsip ....",
+    "options": [
+      "a. Cepat dan tepat",
+      "b. Jujur dan adil (Jurdil)",
+      "c. Efektif dan efisien",
+      "d. Mandiri dan bersahaja",
+      "e. Tertib dan aman"
+    ],
+    "explanation": "Pada era reformasi, asas pemilu ditegaskan menjadi LUBER dan JURDIL (Langsung, Umum, Bebas, Rahasia, Jujur, dan Adil) sesuai Pasal 22E UUD 1945.",
+    "correct": 1
+  },
+  {
+    "id": 54,
+    "type": "TWK",
+    "category": "bahasaindonesia",
+    "question": "Penulisan kata serapan baku yang tepat menurut Kamus Besar Bahasa Indonesia (KBBI) terdapat pada deretan kata ....",
+    "options": [
+      "a. Apotik, analisa, sistim",
+      "b. Praktek, nasehat, ijasah",
+      "c. Apotek, analisis, praktik",
+      "d. Ijasah, antri, kharisma",
+      "e. Jadwal, kwitansi, kongkrit"
+    ],
+    "explanation": "Bentuk baku yang benar: Apotek (bukan apotik), Analisis (bukan analisa), dan Praktik (bukan praktek).",
+    "correct": 2
+  },
+  {
+    "id": 55,
+    "type": "TWK",
+    "category": "bahasaindonesia",
+    "question": "Cermati kalimat berikut: 'Pemerintah daerah merencanakan pembangunan rumah sakit umum di kawasan pesisir.' Pola struktur kalimat tersebut adalah ....",
+    "options": [
+      "a. Subjek - Predikat - Objek - Keterangan",
+      "b. Subjek - Predikat - Pelengkap",
+      "c. Predikat - Objek - Keterangan",
+      "d. Subjek - Predikat - Keterangan",
+      "e. Subjek - Objek - Predikat"
+    ],
+    "explanation": "Fungsi sintaksis: 'Pemerintah daerah' (Subjek), 'merencanakan' (Predikat), 'pembangunan rumah sakit umum' (Objek), 'di kawasan pesisir' (Keterangan tempat). Pola: S-P-O-K.",
+    "correct": 0
+  },
+  {
+    "id": 56,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "MILITAN bersinonim dengan kata ....",
+    "options": [
+      "a. Anti penindasan",
+      "b. Ideologi",
+      "c. Agresif / bersemangat tinggi",
+      "d. Brutal",
+      "e. Penggolongan"
+    ],
+    "explanation": "Militan bermakna bersemangat tinggi, penuh gairah perjuangan, dan agresif dalam memperjuangkan keyakinannya.",
+    "correct": 2
+  },
+  {
+    "id": 57,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "BONAFIDE memiliki arti persamaan kata (sinonim) dengan ....",
+    "options": [
+      "a. Tegar",
+      "b. Jenis tanaman hias",
+      "c. Surat catatan",
+      "d. Saham berharga",
+      "e. Dapat dipercaya"
+    ],
+    "explanation": "Bonafide berasal dari bahasa Latin yang bermakna dengan itikad baik, jujur, dan dapat dipercaya keabsahannya.",
+    "correct": 4
+  },
+  {
+    "id": 58,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "APORISMA bersinonim dengan kata ....",
+    "options": [
+      "a. Apriori",
+      "b. Maksimal",
+      "c. Bentuk",
+      "d. Pendekatan",
+      "e. Prima"
+    ],
+    "explanation": "Aporisma bermakna maksimal, dalil singkat padat yang memuat kebenaran tertinggi.",
+    "correct": 1
+  },
+  {
+    "id": 59,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "SEREBRUM bersinonim dengan kata ....",
+    "options": [
+      "a. Otak kecil",
+      "b. Otak besar",
+      "c. Batang otak",
+      "d. Tulang punggung",
+      "e. Sel saraf"
+    ],
+    "explanation": "Serebrum (cerebrum) adalah istilah anatomi kedokteran untuk otak besar, sedangkan serebelum (cerebellum) adalah otak kecil.",
+    "correct": 1
+  },
+  {
+    "id": 60,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "TANGKAL bersinonim dengan kata ....",
+    "options": [
+      "a. Cegah / halau",
+      "b. Tak mempan",
+      "c. Lelang",
+      "d. Rangkul",
+      "e. Sambut"
+    ],
+    "explanation": "Menangkal berarti mencegah, menolak, atau menghalau bahaya/serangan.",
+    "correct": 0
+  },
+  {
+    "id": 61,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "ELABORASI bersinonim dengan kata ....",
+    "options": [
+      "a. Penyusunan dalil",
+      "b. Pendadaran",
+      "c. Penjelasan terperinci / penggarapan tekun",
+      "d. Kontrak kerja",
+      "e. Pengurangan beban"
+    ],
+    "explanation": "Elaborasi berarti penggarapan secara tekun, cermat, terperinci, dan mendalam.",
+    "correct": 2
+  },
+  {
+    "id": 62,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "RESIDU bersinonim dengan kata ....",
+    "options": [
+      "a. Reduksi",
+      "b. Remisi",
+      "c. Sisa / ampas",
+      "d. Endapan",
+      "e. Hasil"
+    ],
+    "explanation": "Residu adalah ampas, sisa, atau endapan dari suatu proses penyaringan atau reaksi kimia.",
+    "correct": 2
+  },
+  {
+    "id": 63,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "EPILOG berlawanan arti (antonim) dengan kata ....",
+    "options": [
+      "a. Hipolog",
+      "b. Dialog",
+      "c. Monolog",
+      "d. Analog",
+      "e. Prolog"
+    ],
+    "explanation": "Epilog adalah bagian penutup/akhir karya sastra, sedangkan prolog adalah bagian pembukaan/pendahuluan.",
+    "correct": 4
+  },
+  {
+    "id": 64,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "NOMADEN >< .... (Lawan Kata)",
+    "options": [
+      "a. Tetap / Menetap",
+      "b. Berpindah",
+      "c. Bermoral",
+      "d. Liar",
+      "e. Teratur"
+    ],
+    "explanation": "Nomaden bermakna berpindah-pindah tempat tinggal. Lawan katanya adalah menetap/tinggal tetap.",
+    "correct": 0
+  },
+  {
+    "id": 65,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "KONKAF >< .... (Lawan Kata)",
+    "options": [
+      "a. Optik",
+      "b. Lensa",
+      "c. Cekung",
+      "d. Konveks (Cembung)",
+      "e. Cermin"
+    ],
+    "explanation": "Konkaf bermakna cekung ke dalam. Lawan katanya adalah konveks yang bermakna cembung melengkung ke luar.",
+    "correct": 3
+  },
+  {
+    "id": 66,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "SPORADIS berlawanan arti (antonim) dengan kata ....",
+    "options": [
+      "a. Jarang",
+      "b. Kerap / sering",
+      "c. Laten",
+      "d. Berhenti",
+      "e. Merata"
+    ],
+    "explanation": "Sporadis berarti tidak tentu, kadang-kadang, atau jarang terjadi. Lawan katanya adalah kerap, sering, atau terus-menerus.",
+    "correct": 1
+  },
+  {
+    "id": 67,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "GEGAI >< .... (Lawan Kata)",
+    "options": [
+      "a. Petir",
+      "b. Sahih",
+      "c. Lemah",
+      "d. Kuat / kokoh",
+      "e. Rapuh"
+    ],
+    "explanation": "Gegai bermakna mudah goyah, lemah, atau tidak kuat persendiannya. Lawan katanya adalah kuat, kokoh, atau sentosa.",
+    "correct": 3
+  },
+  {
+    "id": 68,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "AMATIR >< .... (Lawan Kata)",
+    "options": [
+      "a. Pemula",
+      "b. Kampiun / ahli profesional",
+      "c. Penggemar",
+      "d. Wasit",
+      "e. Penonton"
+    ],
+    "explanation": "Amatir adalah orang yang melakukan sesuatu atas dasar kegemaran bukan pekerjaan pokok. Lawan katanya adalah profesional atau kampiun (ahli).",
+    "correct": 1
+  },
+  {
+    "id": 69,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "KAPABEL >< .... (Lawan Kata)",
+    "options": [
+      "a. Piawai",
+      "b. Pandai",
+      "c. Cakap",
+      "d. Bodoh / tidak mampu",
+      "e. Terlatih"
+    ],
+    "explanation": "Kapabel berarti mampu, cakap, atau pandai. Lawan katanya adalah bodoh atau tidak berkemampuan.",
+    "correct": 3
+  },
+  {
+    "id": 70,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "BECAK : KENDARAAN = .... : .... (Padanan Hubungan Analogi)",
+    "options": [
+      "a. Gadis : Orang",
+      "b. Bengawan : Sungai",
+      "c. Guru : Murid",
+      "d. Baja : Belati",
+      "e. Kapal : Perahu"
+    ],
+    "explanation": "Becak merupakan salah satu jenis/bagian dari kendaraan, sebagaimana gadis merupakan salah satu jenis/bagian dari orang.",
+    "correct": 0
+  },
+  {
+    "id": 71,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "HEINA : ANJING HUTAN = .... : .... (Padanan Hubungan Nama Lain)",
+    "options": [
+      "a. Anoa : Macan",
+      "b. Luwak : Burung",
+      "c. Kuwuk : Kambing",
+      "d. Bajing : Kucing",
+      "e. Keluai : Musang"
+    ],
+    "explanation": "Heina adalah nama lain dari anjing hutan, sebagaimana keluai adalah nama lain dari musang.",
+    "correct": 4
+  },
+  {
+    "id": 72,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "CHILI : SANTIAGO = .... : .... (Padanan Hubungan Ibukota)",
+    "options": [
+      "a. Indonesia : Denpasar",
+      "b. Srilanka : Colombo",
+      "c. Nairobi : Kenya",
+      "d. Mesir : Tripoli",
+      "e. Maroko : Tunis"
+    ],
+    "explanation": "Ibukota negara Chili adalah Santiago, sebagaimana ibukota negara Srilanka adalah Colombo (pola Negara : Ibukota).",
+    "correct": 1
+  },
+  {
+    "id": 73,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "TANGAN BESI : BERPERILAKU KERAS = .... : ....",
+    "options": [
+      "a. Panjang usus : Kecewa",
+      "b. Buah bibir : Kehormatan",
+      "c. Kepala batu : Supel",
+      "d. Panas hati : Marah",
+      "e. Mata-mata : Tangan kanan"
+    ],
+    "explanation": "Kiasan 'tangan besi' bermakna berperilaku keras/kejam, sebagaimana kiasan 'panas hati' bermakna marah.",
+    "correct": 3
+  },
+  {
+    "id": 74,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "GUDANG : BARANG = BANK : .... (Padanan Hubungan Tempat Menyimpan)",
+    "options": [
+      "a. Teller",
+      "b. Buku tabungan",
+      "c. Bunga",
+      "d. Uang / deposit",
+      "e. Peminjam"
+    ],
+    "explanation": "Gudang adalah tempat untuk menyimpan barang, sebagaimana bank adalah tempat untuk menyimpan uang/deposit.",
+    "correct": 3
+  },
+  {
+    "id": 75,
+    "type": "TIU",
+    "category": "verbal",
+    "question": "KEMEJA : KANCING = RUMAH : .... (Padanan Hubungan Komponen Penutup)",
+    "options": [
+      "a. Atap",
+      "b. Pintu",
+      "c. Kamar",
+      "d. Dinding",
+      "e. Pondasi"
+    ],
+    "explanation": "Kancing berfungsi untuk menutup kemeja, sebagaimana pintu berfungsi untuk menutup atau membuka akses rumah.",
+    "correct": 1
+  },
+  {
+    "id": 76,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Tentukan angka selanjutnya dari deret barisan berikut: 3, 6, 12, 24, 48, ....",
+    "options": [
+      "a. 72",
+      "b. 84",
+      "c. 96",
+      "d. 108",
+      "e. 120"
+    ],
+    "explanation": "Pola perkalian konstan 2 (deret geometri). Suku berikutnya adalah 48 × 2 = 96.",
+    "correct": 2
+  },
+  {
+    "id": 77,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Tentukan dua suku berikutnya pada barisan angka berikut: 4, 7, 11, 16, 22, ..., ....",
+    "options": [
+      "a. 28, 35",
+      "b. 29, 37",
+      "c. 28, 36",
+      "d. 29, 36",
+      "e. 30, 39"
+    ],
+    "explanation": "Selisih bertingkat: +3, +4, +5, +6, lalu +7 (22 + 7 = 29), kemudian +8 (29 + 8 = 37).",
+    "correct": 1
+  },
+  {
+    "id": 78,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Suatu pekerjaan pembangunan pos ronda dapat diselesaikan oleh 6 orang pekerja dalam waktu 15 hari. Jika ingin diselesaikan dalam 10 hari, berapa tambahan pekerja yang dibutuhkan?",
+    "options": [
+      "a. 3 orang",
+      "b. 4 orang",
+      "c. 5 orang",
+      "d. 9 orang",
+      "e. 15 orang"
+    ],
+    "explanation": "Perbandingan berbalik nilai: 6 × 15 = P2 × 10 -> 90 = 10 P2 -> P2 = 9 orang. Tambahan pekerja = 9 - 6 = 3 orang.",
+    "correct": 0
+  },
+  {
+    "id": 79,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Jika nilai x = 1/16 dan y = 16%, maka hubungan x dan y yang benar adalah ....",
+    "options": [
+      "a. x > y",
+      "b. x < y",
+      "c. x = y",
+      "d. x = 2y",
+      "e. Tidak dapat ditentukan"
+    ],
+    "explanation": "x = 1/16 = 0,0625 = 6,25%. Nilai y = 16% = 0,16. Karena 6,25% < 16%, maka x < y.",
+    "correct": 1
+  },
+  {
+    "id": 80,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Hasil dari operasi (55 + 30)² adalah ....",
+    "options": [
+      "a. 7.125",
+      "b. 7.175",
+      "c. 7.225",
+      "d. 8.025",
+      "e. 9.025"
+    ],
+    "explanation": "55 + 30 = 85. 85² = 7.225 (Trik kuadrat bilangan berakhiran 5: 8 × 9 = 72, tempelkan 25 -> 7225).",
+    "correct": 2
+  },
+  {
+    "id": 81,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Tentukan angka selanjutnya dari barisan berikut: 23, 26, 19, 22, 15, 18, ..., ....",
+    "options": [
+      "a. 21 dan 14",
+      "b. 21 dan 24",
+      "c. 11 dan 18",
+      "d. 11 dan 4",
+      "e. 11 dan 14"
+    ],
+    "explanation": "Pola berselang: +3, lalu -7. Dari 18 dikurangi 7 = 11. Kemudian 11 ditambah 3 = 14.",
+    "correct": 4
+  },
+  {
+    "id": 82,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Tentukan dua huruf selanjutnya dari barisan abjad: C, G, K, O, ..., ....",
+    "options": [
+      "a. T dan X",
+      "b. S dan V",
+      "c. S dan W",
+      "d. R dan V",
+      "e. R dan W"
+    ],
+    "explanation": "Pola bertambah 4 huruf abjad: C (3) + 4 = G (7) + 4 = K (11) + 4 = O (15) + 4 = S (19) + 4 = W (23).",
+    "correct": 2
+  },
+  {
+    "id": 83,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Hitunglah hasil dari operasi bilangan berikut: (17 × 125 + 83 × 125) : 25 = ....",
+    "options": [
+      "a. 20",
+      "b. 200",
+      "c. 320",
+      "d. 500",
+      "e. 720"
+    ],
+    "explanation": "Gunakan sifat distributif perkalian: (17 + 83) × 125 : 25 = 100 × (125 : 25) = 100 × 5 = 500.",
+    "correct": 3
+  },
+  {
+    "id": 84,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Jika 291ab - 32 = 328, maka berapakah nilai dari 97ab?",
+    "options": [
+      "a. 120",
+      "b. 130",
+      "c. 140",
+      "d. 150",
+      "e. 160"
+    ],
+    "explanation": "291ab = 328 + 32 = 360. Perhatikan bahwa 291 : 3 = 97. Maka 97ab = 360 : 3 = 120.",
+    "correct": 0
+  },
+  {
+    "id": 85,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Hitunglah operasi hitung cepat berikut: 634 + 8 × 125 - 2.048 : 64 = ....",
+    "options": [
+      "a. 1.456",
+      "b. 1.602",
+      "c. 1.666",
+      "d. 1.774",
+      "e. 1.888"
+    ],
+    "explanation": "Dahulukan perkalian dan pembagian: 8 × 125 = 1.000; 2.048 : 64 = 32. Maka: 634 + 1.000 - 32 = 1.602.",
+    "correct": 1
+  },
+  {
+    "id": 86,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Nilai dari 37,5% dari 0,333... adalah ....",
+    "options": [
+      "a. 0,008",
+      "b. 0,015",
+      "c. 0,1",
+      "d. 0,125",
+      "e. 0,321"
+    ],
+    "explanation": "Pecahan istimewa: 37,5% = 3/8 dan 0,333... = 1/3. Maka (3/8) × (1/3) = 1/8 = 0,125.",
+    "correct": 3
+  },
+  {
+    "id": 87,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Seorang penjual buah membeli buah seharga Rp450.000,00 dan berhasil menjual seluruhnya seharga Rp573.750,00. Berapakah persentase keuntungan penjual tersebut?",
+    "options": [
+      "a. 20%",
+      "b. 22,5%",
+      "c. 25%",
+      "d. 25,5%",
+      "e. 27,5%"
+    ],
+    "explanation": "Untung = Rp573.750 - Rp450.000 = Rp123.750. %Untung = (123.750 / 450.000) × 100% = 27,5%.",
+    "correct": 4
+  },
+  {
+    "id": 88,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Tentukan huruf selanjutnya dari deret: X, U, X, R, X, O, X, ....",
+    "options": [
+      "a. L",
+      "b. N",
+      "c. K",
+      "d. X",
+      "e. M"
+    ],
+    "explanation": "Huruf X tetap. Deret huruf berselang berkurang 3 abjad: U (21) - 3 = R (18) - 3 = O (15) - 3 = L (12). Maka jawabannya L.",
+    "correct": 0
+  },
+  {
+    "id": 89,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Tentukan kelompok huruf berikutnya dari barisan: ABD, FGI, KLN, PQS, ....",
+    "options": [
+      "a. WXA",
+      "b. UVW",
+      "c. TUV",
+      "d. TUW",
+      "e. UVX"
+    ],
+    "explanation": "Pola kelompok: +1, +2. Lompatan antarkelompok: D ke F (+2), I ke K (+2), N ke P (+2), S ke U (+2). Kelompok berikutnya berawal dari U: U (+1) = V, V (+2) = X -> UVX.",
+    "correct": 4
+  },
+  {
+    "id": 90,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Tentukan angka selanjutnya dari barisan: 2, 5, 10, 17, 26, ....",
+    "options": [
+      "a. 35",
+      "b. 36",
+      "c. 37",
+      "d. 38",
+      "e. 40"
+    ],
+    "explanation": "Pola kuadrat n² + 1: 1²+1=2, 2²+1=5, 3²+1=10, 4²+1=17, 5²+1=26, maka suku ke-6 adalah 6²+1 = 37.",
+    "correct": 2
+  },
+  {
+    "id": 91,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Lima tahun yang lalu jumlah umur dua orang bersaudara adalah 26 tahun. Sekarang perbandingan umur yang tua dan muda adalah 3 : 1. Perbandingan umur mereka 9 tahun kemudian adalah ....",
+    "options": [
+      "a. 3 : 1",
+      "b. 2 : 1",
+      "c. 3 : 2",
+      "d. 4 : 3",
+      "e. 5 : 4"
+    ],
+    "explanation": "Misal umur sekarang x dan y (x = 3y). Lima tahun lalu: (x-5) + (y-5) = 26 -> x + y = 36. 3y + y = 36 -> 4y = 36 -> y = 9 tahun, x = 27 tahun. Sembilan tahun kemudian: x = 36 tahun, y = 18 tahun. Rasio = 36 : 18 = 2 : 1.",
+    "correct": 1
+  },
+  {
+    "id": 92,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Dodi membuat kotak balok dengan perbandingan p : l : t = 4 : 2 : 3. Jika panjang kotak 12 cm, berapakah luas seluruh permukaan kotak tersebut?",
+    "options": [
+      "a. 468 cm²",
+      "b. 516 cm²",
+      "c. 576 cm²",
+      "d. 624 cm²",
+      "e. 688 cm²"
+    ],
+    "explanation": "p = 12 cm (4 bagian -> 1 bagian = 3 cm). Maka l = 6 cm, t = 9 cm. Luas permukaan = 2(pl + pt + lt) = 2(72 + 108 + 54) = 468 cm².",
+    "correct": 0
+  },
+  {
+    "id": 93,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Semua murid yang mengikuti ujian tidak menggunakan kalkulator. Sebagian murid yang ujian mengenakan jam tangan. Simpulan yang sah adalah ....",
+    "options": [
+      "a. Semua murid yang ujian mengenakan jam tangan",
+      "b. Sementara murid yang ujian tidak mengenakan jam tangan",
+      "c. Semua murid tidak menggunakan kalkulator dan tidak mengenakan jam tangan",
+      "d. Sebagian murid yang ujian mengenakan jam tangan dan tidak menggunakan kalkulator",
+      "e. Sebagian murid yang ujian mengenakan jam tangan dan menggunakan kalkulator"
+    ],
+    "explanation": "Silogisme kuantor: premis partikular + negatif menghasilkan kesimpulan partikular negatif: 'Sebagian murid yang ujian mengenakan jam tangan dan tidak menggunakan kalkulator'.",
+    "correct": 3
+  },
+  {
+    "id": 94,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Ali lebih cermat dari Budi, tapi lebih ceroboh dari Deni. Mardi lebih cermat dari Deni. Urutan dari yang paling cermat adalah ....",
+    "options": [
+      "a. Mardi, Deni, Ali, Budi",
+      "b. Deni, Mardi, Ali, Budi",
+      "c. Mardi, Ali, Budi, Deni",
+      "d. Mardi, Deni, Budi, Ali",
+      "e. Deni, Budi, Mardi, Ali"
+    ],
+    "explanation": "Kecermatan: Ali > Budi; Deni > Ali; Mardi > Deni. Urutan dari yang paling cermat: Mardi > Deni > Ali > Budi.",
+    "correct": 0
+  },
+  {
+    "id": 95,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Jika x adalah luas persegi dengan panjang sisi 20 cm, dan y adalah luas lingkaran dengan diameter 20 cm, maka hubungan x dan y adalah ....",
+    "options": [
+      "a. x > y",
+      "b. x < y",
+      "c. x = y",
+      "d. x dan y tidak dapat ditentukan",
+      "e. x = 2y"
+    ],
+    "explanation": "Luas persegi x = 20 × 20 = 400 cm². Luas lingkaran y (r = 10 cm) = 3,14 × 10² = 314 cm². Karena 400 > 314, maka x > y.",
+    "correct": 0
+  },
+  {
+    "id": 96,
+    "type": "TIU",
+    "category": "tiu",
+    "question": "Untuk bepergian dari Cilacap ke Jakarta tersedia 6 pilihan bus, dan dari Jakarta ke Makassar tersedia 4 pesawat. Berapa variasi perjalanan pergi pulang tanpa menggunakan kendaraan yang sama?",
+    "options": [
+      "a. 160 cara",
+      "b. 200 cara",
+      "c. 240 cara",
+      "d. 360 cara",
+      "e. 400 cara"
+    ],
+    "explanation": "Pergi = 6 bus × 4 pesawat = 24 cara. Pulang = 3 pesawat × 5 bus = 15 cara. Total variasi = 24 × 15 = 360 cara.",
+    "correct": 3
+  },
+  {
+    "id": 97,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Saat melayani pelanggan, seorang ibu-ibu menyerobot antrean dan meminta pelayanan segera karena merasa sudah lelah menunggu terlalu lama. Sikap Anda adalah ....",
+    "options": [
+      "a. Memintanya untuk kembali ke antrean secara tegas",
+      "b. Memintanya untuk kembali ke antrean dan tetap melayani sesuai nomor urut",
+      "c. Meminta izin dengan sopan pada antrean yang dilewati untuk melayaninya terlebih dahulu agar tidak terjadi keributan di ruang pelayanan",
+      "d. Mendiamkan ibu tersebut dan tidak mempedulikannya",
+      "e. Meminta rekan kerja lain untuk melayaninya di loket terpisah"
+    ],
+    "explanation": "Opsi C (Skor 5) mencerminkan kepekaan situasi pelayanan, komunikasi persuasif dengan pengguna layanan lain, dan mencegah keributan secara bijaksana.",
+    "weights": [
+      1,
+      2,
+      5,
+      3,
+      4
+    ]
+  },
+  {
+    "id": 98,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Salah seorang pengunjung komplain dengan nada keras terhadap pelayanan yang diberikan oleh instansi tempat Anda bekerja. Sikap Anda adalah ....",
+    "options": [
+      "a. Membantu menyelesaikan permasalahan pengunjung tersebut sebisanya",
+      "b. Mengabaikannya karena pekerjaan Anda sendiri sedang menumpuk",
+      "c. Menjelaskan rincian pembagian peran tugas Anda di instansi",
+      "d. Menjelaskan aturan dan prosedur yang berlaku secara kaku",
+      "e. Mencatat dengan cermat dan menyampaikan keluhan pengunjung tersebut kepada pimpinan sebagai bahan evaluasi perbaikan instansi"
+    ],
+    "explanation": "Opsi E (Skor 5) memandang kritik dan komplain pelanggan sebagai sarana perbaikan mutu pelayanan instansi yang wajib ditindaklanjuti secara berjenjang ke pimpinan.",
+    "weights": [
+      4,
+      1,
+      2,
+      3,
+      5
+    ]
+  },
+  {
+    "id": 99,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Saat Anda dan rekan kerja sedang melakukan pelayanan, tiba-tiba seorang pengunjung marah-marah hingga menyakiti hati rekan kerja Anda. Sikap Anda adalah ....",
+    "options": [
+      "a. Diam saja karena merasa itu bukan urusan pribadi saya",
+      "b. Menenangkan pengunjung tersebut lalu mengarahkannya ke meja konsultasi untuk dilayani dengan baik dan jelas",
+      "c. Menegur pengunjung tersebut dan membalas dengan kata-kata keras",
+      "d. Langsung meminta maaf dan membenarkan semua tuduhan pengunjung",
+      "e. Mengajak rekan kerja untuk mogok melayani pengunjung tersebut"
+    ],
+    "explanation": "Opsi B (Skor 5) memperlihatkan kestabilan emosi, mampu mengendalikan situasi krisis pelayanan dengan kepala dingin, dan solutif.",
+    "weights": [
+      2,
+      5,
+      3,
+      4,
+      1
+    ]
+  },
+  {
+    "id": 100,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Saat Anda sedang melayani masyarakat di loket, teman akrab masa kecil Anda tiba-tiba datang dan tampaknya ingin mengobrol banyak hal. Tindakan Anda adalah ....",
+    "options": [
+      "a. Meminta rekan kantor menggantikan tugas Anda agar Anda bisa leluasa mengobrol",
+      "b. Meminta izin atasan meninggalkan meja kerja",
+      "c. Menyuruh teman Anda pulang dan tidak boleh datang lagi",
+      "d. Menutup loket pelayanan sementara waktu",
+      "e. Menyapa dengan ramah dan memintanya menunggu dengan sabar sampai jam tugas pelayanan Anda selesai"
+    ],
+    "explanation": "Opsi E (Skor 5) menunjukkan profesionalisme tinggi dan mendahulukan kewajiban pelayanan publik di atas urusan pribadi pertemanan.",
+    "weights": [
+      2,
+      3,
+      1,
+      1,
+      5
+    ]
+  },
+  {
+    "id": 101,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Seorang pemohon ingin mengurus dokumen penting dalam waktu cepat, sementara rekan kerja Anda yang melayani kelelahan dan Anda masih memiliki sisa berkas pekerjaan. Sikap Anda adalah ....",
+    "options": [
+      "a. Menggantikan rekan kerja dan mengabaikan tugas Anda",
+      "b. Melaporkan rekan kerja ke pimpinan karena dinilai lemah",
+      "c. Menyuruh pemohon datang besok hari",
+      "d. Memarahi rekan kerja karena tidak tanggap",
+      "e. Menuntaskan tanggung jawab berkas Anda terlebih dahulu, kemudian berinisiatif membantu rekan yang kelelahan melayani pemohon"
+    ],
+    "explanation": "Opsi E (Skor 5) mencerminkan tanggung jawab tuntas atas tugas kedinasan pribadi serta inisiatif kerja sama tim yang saling mendukung.",
+    "weights": [
+      3,
+      2,
+      2,
+      1,
+      5
+    ]
+  },
+  {
+    "id": 102,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Menurut Anda, kunci utama keberhasilan sebuah tim kerja dalam mencapai target program organisasi adalah ....",
+    "options": [
+      "a. Kepemimpinan atasan yang bersikap sangat otoriter",
+      "b. Fasilitas kantor yang serba mewah",
+      "c. Kemauan seluruh anggota tim untuk bekerja lembur tiap hari",
+      "d. Adanya kompetisi ketat antarrekan kerja dalam satu ruangan",
+      "e. Kesamaan visi-misi, koordinasi yang terbuka, dan komitmen bersama seluruh anggota tim"
+    ],
+    "explanation": "Opsi E (Skor 5) merupakan fondasi utama sinergi jejaring kerja dan kinerja tim yang solid serta terarah.",
+    "weights": [
+      1,
+      2,
+      3,
+      2,
+      5
+    ]
+  },
+  {
+    "id": 103,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Cara yang paling efektif dan berkesinambungan untuk memelihara hubungan kerja yang baik dengan relasi dan pemangku kepentingan adalah ....",
+    "options": [
+      "a. Memberikan hadiah-hadiah mewah pada hari raya",
+      "b. Mengabaikan kritik dan saran jika pekerjaan sudah selesai",
+      "c. Berinteraksi hanya saat sedang ada kepentingan proyek dinas",
+      "d. Meminta bagian lain yang mengurus seluruh hubungan komunikasi",
+      "e. Menjaga komunikasi timbal balik secara berkala, mendengarkan kebutuhan, dan menjunjung tinggi kepercayaan bersama"
+    ],
+    "explanation": "Opsi E (Skor 5) mengedepankan asas saling percaya (trust), komunikasi dua arah, dan profesionalisme kemitraan jangka panjang.",
+    "weights": [
+      2,
+      1,
+      3,
+      2,
+      5
+    ]
+  },
+  {
+    "id": 104,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Seorang oknum menjanjikan kenaikan pangkat dan jabatan kepada Anda di instansi, namun meminta sejumlah uang pelicin sebagai imbalannya. Sikap Anda adalah ....",
+    "options": [
+      "a. Menerima tawaran tersebut karena promosi adalah kesempatan langka",
+      "b. Mencari pinjaman uang ke kerabat dekat demi jabatan",
+      "c. Menolak tawaran tersebut secara tegas dan tetap berdedikasi bekerja jujur sesuai etika profesi",
+      "d. Mengurangi jumlah nominal uang yang diminta melalui negosiasi",
+      "e. Meminta pendapat rekan apakah hal itu wajar dilakukan"
+    ],
+    "explanation": "Opsi C (Skor 5) membuktikan integritas moral sejati aparatur sipil negara yang menolak praktik suap dan KKN.",
+    "weights": [
+      1,
+      1,
+      5,
+      2,
+      2
+    ]
+  },
+  {
+    "id": 105,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Dalam rapat rukun tetangga (RT), diusulkan agar seluruh warga kerja bakti membantu membangun gedung posyandu yang sebenarnya sudah diserahkan ke pihak pemborong. Pendapat Anda adalah ....",
+    "options": [
+      "a. Menolak mentah-mentah karena sudah ada pemborong",
+      "b. Mengusulkan agar kerja bakti difokuskan pada kebersihan lingkungan sekitar, dan menghormati peran pemborong agar pekerjaan lebih tertib dan efisien",
+      "c. Membiarkan saja dan tidak perlu hadir",
+      "d. Memarahi pengurus RT yang boros anggaran",
+      "e. Membayar orang lain untuk menggantikan kehadiran Anda"
+    ],
+    "explanation": "Opsi B (Skor 5) memahami pembagian peran teknis (job desc) secara cermat, menjaga efisiensi kinerja, sekaligus tetap menjaga kebersamaan warga.",
+    "weights": [
+      2,
+      5,
+      1,
+      1,
+      3
+    ]
+  },
+  {
+    "id": 106,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Di instansi Anda baru saja diberlakukan sistem aplikasi absensi dan pelaporan digital baru. Sebagian pegawai senior kesulitan mengoperasikannya. Sikap Anda adalah ....",
+    "options": [
+      "a. Ikut mengeluh dan meminta pimpinan kembali ke cara manual",
+      "b. Mempelajari modul aplikasi secara mandiri dan bersedia meluangkan waktu mendampingi rekan kerja senior yang mengalami kendala teknis",
+      "c. Mengabaikan rekan senior karena itu tanggung jawab masing-masing",
+      "d. Meminta bagian IT mengerjakan semua laporan rekan senior",
+      "e. Menggunakan aplikasi hanya jika sedang diawasi"
+    ],
+    "explanation": "Opsi B (Skor 5) mencerminkan kemampuan adaptasi teknologi informasi, semangat belajar mandiri, dan kepedulian tim.",
+    "weights": [
+      1,
+      5,
+      2,
+      2,
+      2
+    ]
+  },
+  {
+    "id": 107,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Anda mendapati salah seorang rekan kantor berubah sikap menjadi sangat pendiam, tertutup, dan mulai menganggap orang yang berbeda paham keagamaan adalah kelompok yang sesat dan halal dimusuhi. Menghadapi kondisi tersebut, tindakan Anda adalah ....",
+    "options": [
+      "a. Tidak melakukan apa-apa karena tidak mau mencampuri urusan pribadi orang lain",
+      "b. Membiarkannya selama ia tidak mengganggu pekerjaan dinas Anda",
+      "c. Mengajaknya berdiskusi secara persuasif empat mata untuk meluruskan pemikirannya",
+      "d. Melaporkan perubahan sikap dan indikasi radikalisme tersebut kepada atasan/pimpinan agar mendapat penanganan tepat dan proporsional",
+      "e. Langsung menyebarkan keburukan rekan tersebut di media sosial kantor"
+    ],
+    "explanation": "Opsi D (Skor 5) adalah tindakan paling tepat dan terukur dalam mitigasi anti-radikalisme di lingkungan kerja aparatur sipil negara.",
+    "weights": [
+      3,
+      2,
+      4,
+      5,
+      1
+    ]
+  },
+  {
+    "id": 108,
+    "type": "TKP",
+    "category": "tkp",
+    "question": "Pergolakan daerah dan tuntutan separatisme merupakan ancaman serius terhadap persatuan bangsa. Menurut KBBI, disintegrasi merupakan ....",
+    "options": [
+      "a. Kejahatan makar terselubung",
+      "b. Aksi sabotase sarana vital negara",
+      "c. Spionase dari dinas rahasia asing",
+      "d. Keadaan tidak bersatu padu, terpecah belah, dan hilangnya keutuhan atau persatuan",
+      "e. Kemerosotan moral di kalangan generasi muda"
+    ],
+    "explanation": "Opsi D (Skor 5) mendefinisikan disintegrasi secara tepat menurut KBBI, yaitu keadaan tidak bersatu padu dan hilangnya keutuhan persatuan.",
+    "weights": [
+      2,
+      2,
+      3,
+      5,
+      1
+    ]
+  }
+];
+
+    // Lengkapi cadangan variasi agar total bank soal CAT mencapai standar penuh 110 nomor
+    while (MASTER_QUESTIONS.length < 110) {
+      const copyQ = { ...MASTER_QUESTIONS[MASTER_QUESTIONS.length % 22] };
+      copyQ.id = MASTER_QUESTIONS.length + 1;
+      MASTER_QUESTIONS.push(copyQ);
+    }
+
+    /* ========================================================
+       STATE APLIKASI & LOGIKA RANDOM ROTATION
+       ======================================================== */
+    let currentQuestions = [];
+    let userAnswers = {};
+    let raguMap = {};
+    let currentQIdx = 0;
+    let timerInterval = null;
+    let remainingSeconds = 6000;
+    let isSoundEnabled = true;
+    let drillQuestions = [];
+    let drillIndex = 0;
+    let deferredPrompt = null;
+
+    // Course System State
+    let currentLessonIdx = 0;
+    let completedLessons = {};
+    let activeCourseCategory = 'all';
+
+    /* Fisher-Yates Shuffle Utility */
+    function shuffleArray(arr) {
+      const array = [...arr];
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    /* Web Audio Synthesis */
+    const audioCtx = (window.AudioContext || window.webkitAudioContext) ? new (window.AudioContext || window.webkitAudioContext)() : null;
+    function playBeep(frequency = 600, duration = 0.08, type = 'sine') {
+      if (!isSoundEnabled || !audioCtx) return;
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = frequency;
+        gain.gain.value = 0.05;
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // fail silently
+      }
+    }
+
+    function toggleSound() {
+      isSoundEnabled = !isSoundEnabled;
+      const icon = document.getElementById('soundIcon');
+      if (isSoundEnabled) {
+        icon.setAttribute('data-lucide', 'volume-2');
+        showToast("Suara feedback aktif");
+        playBeep(750, 0.1);
+      } else {
+        icon.setAttribute('data-lucide', 'volume-x');
+        showToast("Suara dimatikan");
+      }
+      lucide.createIcons();
+    }
+
+    /* Tab Switcher */
+    function switchTab(tabId) {
+      playBeep(450, 0.05);
+      const tabs = ['study', 'sim', 'quiz', 'tips'];
+      tabs.forEach(t => {
+        const sec = document.getElementById(`tab-${t}-content`);
+        const nav = document.getElementById(`nav-${t}`);
+        if (t === tabId) {
+          sec.classList.remove('hidden');
+          sec.classList.add('block');
+          if (nav) {
+            nav.classList.add('text-blue-600', 'bg-blue-50');
+            nav.classList.remove('text-slate-600', 'hover:bg-slate-100');
+          }
+        } else {
+          sec.classList.add('hidden');
+          sec.classList.remove('block');
+          if (nav) {
+            nav.classList.remove('text-blue-600', 'bg-blue-50');
+            nav.classList.add('text-slate-600', 'hover:bg-slate-100');
+          }
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      lucide.createIcons();
+    }
+
+    /* Toast Notification */
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = "pointer-events-auto bg-slate-900 text-white text-xs px-4 py-2.5 rounded-xl shadow-lg flex items-center space-x-2 border border-slate-700 transform transition duration-300 opacity-90";
+      toast.innerHTML = `<i data-lucide="info" class="w-4 h-4 text-blue-400"></i><span>${message}</span>`;
+      container.appendChild(toast);
+      lucide.createIcons();
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-x-4');
+        setTimeout(() => toast.remove(), 350);
+      }, 2500);
+    }
+
+    function scrollToId(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* ========================================================
+       COURSE LMS ENGINE (ACADEMY PEJUANG NIP)
+       ======================================================== */
+    function renderCourseSyllabus(filterKeyword = '') {
+      const container = document.getElementById('course-lesson-list');
+      container.innerHTML = '';
+      
+      let count = 0;
+      COURSE_LESSONS.forEach((lesson, idx) => {
+        const matchesCategory = activeCourseCategory === 'all' || lesson.category === activeCourseCategory;
+        const matchesKeyword = !filterKeyword || lesson.title.toLowerCase().includes(filterKeyword.toLowerCase()) || lesson.content.toLowerCase().includes(filterKeyword.toLowerCase());
+
+        if (!matchesCategory || !matchesKeyword) return;
+        count++;
+
+        const isCurrent = idx === currentLessonIdx;
+        const isDone = !!completedLessons[lesson.id];
+
+        const itemBtn = document.createElement('button');
+        itemBtn.className = `w-full text-left p-2.5 rounded-xl text-xs transition flex items-center justify-between border ${
+          isCurrent 
+            ? 'course-active border-blue-300 shadow-xs' 
+            : 'bg-white hover:bg-slate-50 border-slate-100 text-slate-700'
+        }`;
+        itemBtn.onclick = () => selectLesson(idx);
+
+        let badgeColor = "bg-slate-100 text-slate-600";
+        if (lesson.category === 'TWK') badgeColor = "bg-red-50 text-red-700 border border-red-200";
+        if (lesson.category === 'TIU') badgeColor = "bg-emerald-50 text-emerald-700 border border-emerald-200";
+        if (lesson.category === 'TKP') badgeColor = "bg-amber-50 text-amber-700 border border-amber-200";
+
+        itemBtn.innerHTML = `
+          <div class="flex items-center space-x-2 truncate pr-2">
+            <span class="w-2 h-2 rounded-full ${isDone ? 'bg-emerald-500' : 'bg-slate-300'} shrink-0"></span>
+            <span class="truncate font-medium">${lesson.title}</span>
+          </div>
+          <span class="text-[10px] font-extrabold px-1.5 py-0.5 rounded-md ${badgeColor} shrink-0">${lesson.category}</span>
+        `;
+        container.appendChild(itemBtn);
+      });
+
+      document.getElementById('syllabus-count').textContent = `${count} Modul`;
+      updateProgressDisplay();
+    }
+
+    function selectLesson(idx) {
+      playBeep(520, 0.04);
+      currentLessonIdx = idx;
+      const lesson = COURSE_LESSONS[idx];
+      if (!lesson) return;
+
+      document.getElementById('lesson-title').textContent = lesson.title;
+      document.getElementById('lesson-read-time').innerHTML = `<i data-lucide="clock" class="w-3 h-3"></i><span>${lesson.readTime} baca</span>`;
+      
+      const badge = document.getElementById('lesson-category-badge');
+      badge.textContent = `${lesson.category} Module`;
+      if (lesson.category === 'TWK') badge.className = "px-2.5 py-0.5 rounded-md text-[11px] font-extrabold bg-red-100 text-red-800 uppercase";
+      if (lesson.category === 'TIU') badge.className = "px-2.5 py-0.5 rounded-md text-[11px] font-extrabold bg-emerald-100 text-emerald-800 uppercase";
+      if (lesson.category === 'TKP') badge.className = "px-2.5 py-0.5 rounded-md text-[11px] font-extrabold bg-amber-100 text-amber-800 uppercase";
+
+      document.getElementById('lesson-content-body').innerHTML = lesson.content;
+
+      // Update completion button
+      const isDone = !!completedLessons[lesson.id];
+      const btnText = document.getElementById('btn-complete-text');
+      const btnMark = document.getElementById('btn-mark-complete');
+      if (isDone) {
+        btnText.textContent = "Selesai Dipelajari ✓";
+        btnMark.className = "px-4 py-2 rounded-xl text-xs font-bold border border-emerald-300 bg-emerald-50 text-emerald-700 transition flex items-center space-x-1.5";
+      } else {
+        btnText.textContent = "Tandai Selesai";
+        btnMark.className = "px-4 py-2 rounded-xl text-xs font-bold border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 transition flex items-center space-x-1.5";
+      }
+
+      // Checkpoint Quiz
+      renderCheckpointQuiz(lesson);
+
+      // Prev / Next button states
+      document.getElementById('btn-prev-lesson').disabled = (idx === 0);
+      document.getElementById('btn-prev-lesson').classList.toggle('opacity-30', idx === 0);
+      document.getElementById('btn-next-lesson').disabled = (idx === COURSE_LESSONS.length - 1);
+      document.getElementById('btn-next-lesson').classList.toggle('opacity-30', idx === COURSE_LESSONS.length - 1);
+
+      renderCourseSyllabus();
+      lucide.createIcons();
+    }
+
+    function renderCheckpointQuiz(lesson) {
+      const qText = document.getElementById('checkpoint-question');
+      const optContainer = document.getElementById('checkpoint-options');
+      const feedback = document.getElementById('checkpoint-feedback');
+
+      feedback.classList.add('hidden');
+      optContainer.innerHTML = '';
+
+      if (!lesson.quiz) {
+        qText.textContent = "Kuis belum tersedia untuk modul ini.";
+        return;
+      }
+
+      qText.textContent = lesson.quiz.q;
+      lesson.quiz.options.forEach((opt, optIdx) => {
+        const btn = document.createElement('button');
+        btn.className = "checkpoint-opt text-left p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-xs text-slate-700 transition flex items-center justify-between";
+        btn.innerHTML = `<span>${opt}</span><span class="text-slate-300 font-bold">Pilih</span>`;
+        btn.onclick = () => checkCheckpointAnswer(optIdx, lesson.quiz);
+        optContainer.appendChild(btn);
+      });
+    }
+
+    function checkCheckpointAnswer(chosenIdx, quizData) {
+      const feedback = document.getElementById('checkpoint-feedback');
+      feedback.classList.remove('hidden');
+
+      const allBtns = document.querySelectorAll('.checkpoint-opt');
+      allBtns.forEach((b, i) => {
+        b.classList.add('pointer-events-none');
+        if (i === quizData.correct) {
+          b.className = "checkpoint-opt text-left p-3 rounded-xl border border-emerald-400 bg-emerald-50 text-xs font-bold text-emerald-900 transition flex items-center justify-between";
+          b.innerHTML = `<span>${quizData.options[i]}</span><span class="text-emerald-700 font-bold">✓ Benar</span>`;
+        } else if (i === chosenIdx) {
+          b.className = "checkpoint-opt text-left p-3 rounded-xl border border-red-400 bg-red-50 text-xs font-bold text-red-900 transition flex items-center justify-between";
+          b.innerHTML = `<span>${quizData.options[i]}</span><span class="text-red-600 font-bold">✗ Pilihan Anda</span>`;
+        }
+      });
+
+      if (chosenIdx === quizData.correct) {
+        playBeep(850, 0.1);
+        feedback.className = "p-3.5 rounded-xl text-xs bg-emerald-50 border border-emerald-300 text-emerald-900 leading-relaxed";
+        feedback.innerHTML = `<strong>Tepat Sekali!</strong> Jawaban Anda benar.<br><span class="mt-1 block text-emerald-700">${quizData.explanation}</span>`;
+        
+        // Tandai modul sebagai selesai
+        const lesson = COURSE_LESSONS[currentLessonIdx];
+        completedLessons[lesson.id] = true;
+        const btnText = document.getElementById('btn-complete-text');
+        const btnMark = document.getElementById('btn-mark-complete');
+        if (btnText && btnMark) {
+          btnText.textContent = "Selesai Dipelajari ✓";
+          btnMark.className = "px-4 py-2 rounded-xl text-xs font-bold border border-emerald-300 bg-emerald-50 text-emerald-700 transition flex items-center space-x-1.5";
+        }
+        updateProgressDisplay();
+        renderCourseSyllabus();
+      } else {
+        playBeep(320, 0.12, 'sawtooth');
+        feedback.className = "p-3.5 rounded-xl text-xs bg-red-50 border border-red-300 text-red-900 leading-relaxed";
+        feedback.innerHTML = `<strong>Belum Tepat.</strong> Kunci jawaban yang benar: <em>${quizData.options[quizData.correct]}</em>.<br><span class="mt-1 block text-red-700">${quizData.explanation}</span>`;
+      }
+    }
+
+    function toggleLessonComplete() {
+      playBeep(700, 0.05);
+      const lesson = COURSE_LESSONS[currentLessonIdx];
+      if (!lesson) return;
+      completedLessons[lesson.id] = !completedLessons[lesson.id];
+      showToast(completedLessons[lesson.id] ? "Modul berhasil ditandai selesai!" : "Tanda selesai dihapus.");
+      selectLesson(currentLessonIdx);
+    }
+
+    function updateProgressDisplay() {
+      const doneCount = Object.values(completedLessons).filter(v => v).length;
+      const total = COURSE_LESSONS.length;
+      const label = document.getElementById('course-progress-label');
+      if (label) {
+        label.textContent = `Progres Belajar: ${doneCount} dari ${total} Modul Selesai (${Math.round((doneCount/total)*100)}%)`;
+      }
+    }
+
+    function navigateLesson(step) {
+      const target = currentLessonIdx + step;
+      if (target >= 0 && target < COURSE_LESSONS.length) {
+        selectLesson(target);
+      }
+    }
+
+    function filterCourseCategory(cat, targetBtn = null) {
+      playBeep(550, 0.04);
+      activeCourseCategory = cat;
+      const btns = document.querySelectorAll('.course-filter-btn');
+      btns.forEach(b => {
+        b.classList.remove('bg-blue-600', 'text-white');
+        b.classList.add('bg-slate-100', 'text-slate-600');
+      });
+      const activeBtn = targetBtn || btns[0];
+      if (activeBtn) {
+        activeBtn.classList.add('bg-blue-600', 'text-white');
+        activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+      }
+      renderCourseSyllabus(document.getElementById('courseSearchInput').value);
+    }
+
+    function searchCourseLessons(val) {
+      renderCourseSyllabus(val);
+    }
+
+    /* ========================================================
+       SIMULASI TRY OUT CAT ENGINE (DENGAN ROTASI ACAK SOAL)
+       ======================================================== */
+    function startTryOutPrompt() {
+      switchTab('sim');
+      if (timerInterval) {
+        document.getElementById('sim-lobby').classList.add('hidden');
+        document.getElementById('sim-exam-screen').classList.remove('hidden');
+      } else {
+        document.getElementById('sim-lobby').classList.remove('hidden');
+        document.getElementById('sim-exam-screen').classList.add('hidden');
+        document.getElementById('sim-result-screen').classList.add('hidden');
+      }
+    }
+
+    function startTryOut(mode = 'full') {
+      playBeep(700, 0.1);
+
+      // Pisahkan bank soal per tipe untuk proporsi resmi BKN
+      const poolTWK = shuffleArray(MASTER_QUESTIONS.filter(q => q.type === 'TWK'));
+      const poolTIU = shuffleArray(MASTER_QUESTIONS.filter(q => q.type === 'TIU'));
+      const poolTKP = shuffleArray(MASTER_QUESTIONS.filter(q => q.type === 'TKP'));
+
+      let selectedTWK = [];
+      let selectedTIU = [];
+      let selectedTKP = [];
+
+      if (mode === 'full') {
+        // Standar Resmi BKN: 110 Soal (30 TWK, 35 TIU, 45 TKP), 100 Menit
+        selectedTWK = poolTWK.slice(0, 30);
+        selectedTIU = poolTIU.slice(0, 35);
+        selectedTKP = poolTKP.slice(0, 45);
+        remainingSeconds = 100 * 60; // 100 menit
+      } else {
+        // Mode Singkat: 30 Soal (10 TWK, 10 TIU, 10 TKP), 27 Menit
+        selectedTWK = poolTWK.slice(0, 10);
+        selectedTIU = poolTIU.slice(0, 10);
+        selectedTKP = poolTKP.slice(0, 10);
+        remainingSeconds = 27 * 60; // 27 menit
+      }
+
+      currentQuestions = [...selectedTWK, ...selectedTIU, ...selectedTKP];
+      userAnswers = {};
+      raguMap = {};
+      currentQIdx = 0;
+      
+      document.getElementById('sim-lobby').classList.add('hidden');
+      document.getElementById('sim-result-screen').classList.add('hidden');
+      document.getElementById('sim-exam-screen').classList.remove('hidden');
+
+      renderNumberPalette();
+      renderExamQuestion(currentQIdx);
+      startTimer();
+      showToast(`Paket Try Out ${mode === 'full' ? 'Lengkap (110 Soal)' : 'Kilat (30 Soal)'} Dimulai!`, "info");
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      updateTimerDisplay();
+      timerInterval = setInterval(() => {
+        remainingSeconds--;
+        updateTimerDisplay();
+        if (remainingSeconds <= 300 && remainingSeconds > 0) {
+          document.getElementById('cat-timer').parentElement.classList.add('bg-red-100', 'text-red-700', 'pulse-danger');
+        }
+        if (remainingSeconds <= 0) {
+          clearInterval(timerInterval);
+          playBeep(300, 0.6, 'sawtooth');
+          showToast("Waktu Ujian Habis! Sistem mengumpulkan lembar jawaban otomatis.");
+          submitExam();
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const minutes = Math.floor(remainingSeconds / 60);
+      const seconds = remainingSeconds % 60;
+      document.getElementById('cat-timer').textContent = 
+        `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    function renderNumberPalette() {
+      const grid = document.getElementById('cat-numbers-grid');
+      grid.innerHTML = '';
+      let answeredCount = 0;
+
+      currentQuestions.forEach((q, idx) => {
+        const btn = document.createElement('button');
+        btn.id = `palette-btn-${idx}`;
+        const isAnswered = userAnswers[idx] !== undefined;
+        const isRagu = raguMap[idx] === true;
+        const isCurrent = idx === currentQIdx;
+
+        if (isAnswered) answeredCount++;
+
+        let bgClass = "bg-slate-100 text-slate-700 border-slate-200";
+        if (isRagu) {
+          bgClass = "bg-amber-400 text-white border-amber-500 font-bold";
+        } else if (isAnswered) {
+          bgClass = "bg-emerald-600 text-white border-emerald-700 font-bold";
+        }
+
+        if (isCurrent) {
+          bgClass += " ring-2 ring-blue-600 ring-offset-1";
+        }
+
+        btn.className = `w-9 h-9 rounded-xl border text-xs flex items-center justify-center transition ${bgClass}`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => jumpToQuestion(idx);
+        grid.appendChild(btn);
+      });
+
+      document.getElementById('answered-counter').textContent = `${answeredCount}/${currentQuestions.length} Terjawab`;
+    }
+
+    function renderExamQuestion(index) {
+      const q = currentQuestions[index];
+      if (!q) return;
+
+      document.getElementById('cat-question-header').textContent = `Soal No. ${index + 1} dari ${currentQuestions.length}`;
+      document.getElementById('cat-progress-text').textContent = `Soal ${index + 1} dari ${currentQuestions.length}`;
+      document.getElementById('cat-source-tag').textContent = `Subtes: ${q.type}`;
+      
+      const badge = document.getElementById('cat-subtest-badge');
+      badge.textContent = `${q.type} - Standar SKD BKN`;
+      if (q.type === 'TWK') {
+        badge.className = "px-3 py-1.5 rounded-lg bg-red-100 text-red-800 font-bold text-xs uppercase";
+      } else if (q.type === 'TIU') {
+        badge.className = "px-3 py-1.5 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs uppercase";
+      } else {
+        badge.className = "px-3 py-1.5 rounded-lg bg-amber-100 text-amber-800 font-bold text-xs uppercase";
+      }
+
+      document.getElementById('cat-question-text').textContent = q.question;
+
+      // Render Options
+      const optionsContainer = document.getElementById('cat-options-container');
+      optionsContainer.innerHTML = '';
+
+      q.options.forEach((opt, optIdx) => {
+        const isSelected = userAnswers[index] === optIdx;
+        const optBtn = document.createElement('button');
+        optBtn.className = `w-full text-left p-4 rounded-xl border transition text-sm flex items-start space-x-3 select-none ${
+          isSelected 
+            ? 'bg-blue-50 border-blue-500 ring-1 ring-blue-500 font-medium text-blue-950' 
+            : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-700'
+        }`;
+        
+        optBtn.onclick = () => selectOption(index, optIdx);
+
+        const circle = isSelected 
+          ? `<span class="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] shrink-0 font-bold">✓</span>`
+          : `<span class="w-5 h-5 rounded-full border border-slate-300 flex items-center justify-center text-[10px] text-slate-400 shrink-0 font-bold">${String.fromCharCode(65 + optIdx)}</span>`;
+
+        optBtn.innerHTML = `
+          ${circle}
+          <span class="leading-relaxed">${opt}</span>
+        `;
+        optionsContainer.appendChild(optBtn);
+      });
+
+      // Update Ragu-ragu Checkbox
+      const raguCheck = document.getElementById('raguCheckbox');
+      raguCheck.checked = !!raguMap[index];
+
+      // Update Prev/Next buttons
+      document.getElementById('btn-prev-question').disabled = (index === 0);
+      document.getElementById('btn-prev-question').classList.toggle('opacity-40', index === 0);
+
+      renderNumberPalette();
+    }
+
+    function selectOption(qIdx, optIdx) {
+      playBeep(800, 0.04);
+      userAnswers[qIdx] = optIdx;
+      renderExamQuestion(qIdx);
+    }
+
+    function toggleRaguCurrent() {
+      playBeep(400, 0.05);
+      raguMap[currentQIdx] = !raguMap[currentQIdx];
+      renderNumberPalette();
+    }
+
+    function navigateQuestion(step) {
+      playBeep(600, 0.04);
+      const nextIdx = currentQIdx + step;
+      if (nextIdx >= 0 && nextIdx < currentQuestions.length) {
+        currentQIdx = nextIdx;
+        renderExamQuestion(currentQIdx);
+      }
+    }
+
+    function jumpToQuestion(idx) {
+      playBeep(600, 0.04);
+      currentQIdx = idx;
+      renderExamQuestion(currentQIdx);
+    }
+
+    function finishExamConfirmation() {
+      const answered = Object.keys(userAnswers).length;
+      const total = currentQuestions.length;
+      const unanswered = total - answered;
+      const raguCount = Object.values(raguMap).filter(v => v).length;
+
+      document.getElementById('confirmModalDesc').innerHTML = `
+        Anda telah menjawab <strong>${answered}</strong> dari total <strong>${total}</strong> butir soal.<br>
+        • Masih kosong: <span class="font-bold text-red-600">${unanswered}</span> nomor.<br>
+        • Ditandai ragu-ragu: <span class="font-bold text-amber-600">${raguCount}</span> nomor.<br><br>
+        Sistem akan segera menghitung akumulasi skor TWK, TIU, dan TKP Anda sesuai standar passing grade.
+      `;
+
+      document.getElementById('modalConfirm').classList.remove('hidden');
+      document.getElementById('modalConfirm').classList.add('flex');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+      document.getElementById(id).classList.remove('flex');
+    }
+
+    function submitExam() {
+      closeModal('modalConfirm');
+      clearInterval(timerInterval);
+      timerInterval = null;
+
+      // Scoring Calculation
+      let twkScore = 0;
+      let tiuScore = 0;
+      let tkpScore = 0;
+
+      let twkMax = 0;
+      let tiuMax = 0;
+      let tkpMax = 0;
+
+      currentQuestions.forEach((q, idx) => {
+        const chosen = userAnswers[idx];
+
+        if (q.type === 'TWK') {
+          twkMax += 5;
+          if (chosen !== undefined && chosen === q.correct) {
+            twkScore += 5;
+          }
+        } else if (q.type === 'TIU') {
+          tiuMax += 5;
+          if (chosen !== undefined && chosen === q.correct) {
+            tiuScore += 5;
+          }
+        } else if (q.type === 'TKP') {
+          tkpMax += 5;
+          if (chosen !== undefined && q.weights && q.weights[chosen] !== undefined) {
+            tkpScore += q.weights[chosen];
+          }
+        }
+      });
+
+      const totalScore = twkScore + tiuScore + tkpScore;
+
+      // Passing Grade Resmi (atau proporsional jika mode 30 soal)
+      const isFull = currentQuestions.length === 110;
+      const twkThreshold = isFull ? 65 : Math.round(twkMax * 0.43);
+      const tiuThreshold = isFull ? 80 : Math.round(tiuMax * 0.45);
+      const tkpThreshold = isFull ? 166 : Math.round(tkpMax * 0.73);
+
+      const passTwk = twkScore >= twkThreshold;
+      const passTiu = tiuScore >= tiuThreshold;
+      const passTkp = tkpScore >= tkpThreshold;
+      const isLolos = passTwk && passTiu && passTkp;
+
+      // Render Results Screen
+      document.getElementById('sim-exam-screen').classList.add('hidden');
+      document.getElementById('sim-result-screen').classList.remove('hidden');
+
+      const badge = document.getElementById('passing-status-badge');
+      const verdict = document.getElementById('result-verdict-text');
+
+      if (isLolos) {
+        badge.className = "inline-flex items-center space-x-1.5 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase bg-emerald-100 text-emerald-800 border border-emerald-300";
+        badge.innerHTML = `<i data-lucide="check-circle" class="w-4 h-4"></i><span>MEMENUHI PASSING GRADE (LOLOS SKD)</span>`;
+        verdict.textContent = "Selamat Pejuang NIP! Seluruh nilai subtes Anda memenuhi ambang batas kelulusan resmi PermenPAN-RB.";
+      } else {
+        badge.className = "inline-flex items-center space-x-1.5 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase bg-red-100 text-red-800 border border-red-300";
+        badge.innerHTML = `<i data-lucide="x-circle" class="w-4 h-4"></i><span>BELUM MEMENUHI PASSING GRADE</span>`;
+        verdict.textContent = "Beberapa subtes Anda belum mencapai ambang batas minimal kelulusan. Pelajari kembali materi modul yang masih lemah.";
+      }
+
+      document.getElementById('total-score-display').textContent = `Total Skor: ${totalScore} (Maks: ${twkMax + tiuMax + tkpMax})`;
+
+      // Targets Label
+      document.getElementById('twk-pg-target').textContent = `Target PG: ${twkThreshold}`;
+      document.getElementById('tiu-pg-target').textContent = `Target PG: ${tiuThreshold}`;
+      document.getElementById('tkp-pg-target').textContent = `Target PG: ${tkpThreshold}`;
+
+      // Score TWK Card
+      document.getElementById('score-twk-val').textContent = `${twkScore} / ${twkMax}`;
+      document.getElementById('twk-status-label').innerHTML = passTwk
+        ? `<span class="text-emerald-700 font-bold">✓ Lolos (≥ ${twkThreshold})</span>`
+        : `<span class="text-red-600 font-bold">✗ Belum Lolos (&lt; ${twkThreshold})</span>`;
+
+      // Score TIU Card
+      document.getElementById('score-tiu-val').textContent = `${tiuScore} / ${tiuMax}`;
+      document.getElementById('tiu-status-label').innerHTML = passTiu
+        ? `<span class="text-emerald-700 font-bold">✓ Lolos (≥ ${tiuThreshold})</span>`
+        : `<span class="text-red-600 font-bold">✗ Belum Lolos (&lt; ${tiuThreshold})</span>`;
+
+      // Score TKP Card
+      document.getElementById('score-tkp-val').textContent = `${tkpScore} / ${tkpMax}`;
+      document.getElementById('tkp-status-label').innerHTML = passTkp
+        ? `<span class="text-emerald-700 font-bold">✓ Lolos (≥ ${tkpThreshold})</span>`
+        : `<span class="text-red-600 font-bold">✗ Belum Lolos (&lt; ${tkpThreshold})</span>`;
+
+      renderComprehensiveDiscussion('all');
+      lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderComprehensiveDiscussion(filter = 'all') {
+      const container = document.getElementById('discussion-list');
+      container.innerHTML = '';
+
+      currentQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[idx];
+        const isAnswered = userChoice !== undefined;
+        let isCorrect = false;
+
+        if (q.type === 'TWK' || q.type === 'TIU') {
+          isCorrect = isAnswered && userChoice === q.correct;
+        } else if (q.type === 'TKP') {
+          const highestWeight = Math.max(...q.weights);
+          isCorrect = isAnswered && q.weights[userChoice] === highestWeight;
+        }
+
+        if (filter === 'wrong' && isCorrect) return;
+        if (filter === 'twk' && q.type !== 'TWK') return;
+        if (filter === 'tiu' && q.type !== 'TIU') return;
+        if (filter === 'tkp' && q.type !== 'TKP') return;
+
+        const card = document.createElement('div');
+        card.className = `p-5 rounded-2xl border transition ${
+          isCorrect ? 'bg-slate-50/50 border-emerald-200' : 'bg-red-50/20 border-red-200'
+        }`;
+
+        let statusBadge = '';
+        if (q.type === 'TKP') {
+          const userBobot = isAnswered ? q.weights[userChoice] : 0;
+          statusBadge = `<span class="px-2.5 py-1 rounded-md text-xs font-bold ${userBobot === 5 ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">Bobot Diperoleh: ${userBobot}/5</span>`;
+        } else {
+          statusBadge = isCorrect
+            ? `<span class="px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-100 text-emerald-800">Jawaban Benar (+5)</span>`
+            : `<span class="px-2.5 py-1 rounded-md text-xs font-bold bg-red-100 text-red-800">${isAnswered ? 'Jawaban Salah (0)' : 'Tidak Dijawab (0)'}</span>`;
+        }
+
+        let optionsHtml = '';
+        q.options.forEach((opt, optI) => {
+          let optStyle = "text-slate-600 bg-white border-slate-200";
+          let extraNote = "";
+
+          if (q.type !== 'TKP') {
+            if (optI === q.correct) {
+              optStyle = "bg-emerald-50 border-emerald-500 font-semibold text-emerald-950";
+              extraNote = `<span class="ml-auto text-xs text-emerald-700 font-bold">Kunci Jawaban</span>`;
+            } else if (optI === userChoice && !isCorrect) {
+              optStyle = "bg-red-50 border-red-400 font-semibold text-red-950";
+              extraNote = `<span class="ml-auto text-xs text-red-600 font-bold">Jawaban Anda</span>`;
+            }
+          } else {
+            const w = q.weights[optI];
+            if (optI === userChoice) {
+              optStyle = "bg-blue-50 border-blue-400 font-semibold text-blue-950";
+              extraNote = `<span class="ml-auto text-xs text-blue-700 font-bold">Pilihan Anda (Poin: ${w})</span>`;
+            } else {
+              extraNote = `<span class="ml-auto text-[11px] text-slate-400">Poin: ${w}</span>`;
+            }
+          }
+
+          optionsHtml += `
+            <div class="p-3 rounded-xl border text-xs flex items-center justify-between ${optStyle}">
+              <span>${opt}</span>
+              ${extraNote}
+            </div>
+          `;
+        });
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase text-slate-400">Nomor ${idx + 1} • Subtes ${q.type}</span>
+            ${statusBadge}
+          </div>
+          <div class="text-sm font-semibold text-slate-800 mb-3 whitespace-pre-line">${q.question}</div>
+          <div class="space-y-2 mb-4">${optionsHtml}</div>
+          <div class="p-3.5 rounded-xl bg-slate-100/90 text-xs text-slate-700 border border-slate-200 leading-relaxed">
+            <div class="font-bold text-slate-900 mb-1 flex items-center space-x-1.5">
+              <i data-lucide="info" class="w-3.5 h-3.5 text-blue-600"></i>
+              <span>Pembahasan & Logika Pemecahan Masalah:</span>
+            </div>
+            <div>${q.explanation}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    function filterDiscussion(val) {
+      playBeep(500, 0.04);
+      renderComprehensiveDiscussion(val);
+    }
+
+    function restartExam() {
+      document.getElementById('sim-result-screen').classList.add('hidden');
+      document.getElementById('sim-lobby').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ========================================================
+       TAB 3: DRILL KILAT ENGINE (SHUFFLE DINAMIS SETIAP KALI KLIK)
+       ======================================================== */
+    function setDrillCategory(cat, targetBtn = null) {
+      playBeep(650, 0.05);
+      const buttons = document.querySelectorAll('.drill-btn');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+      });
+
+      const activeBtn = targetBtn || (window.event && window.event.target) || document.querySelector(`.drill-btn[data-cat="${cat}"]`) || buttons[0];
+      if (activeBtn && activeBtn.classList) {
+        activeBtn.classList.add('bg-blue-600', 'text-white');
+        activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+      }
+
+      // Filter dan acak (shuffle) bank soal
+      let filtered = MASTER_QUESTIONS.filter(q => q.category === cat || cat === 'all');
+      if (filtered.length === 0) filtered = MASTER_QUESTIONS;
+      
+      drillQuestions = shuffleArray(filtered);
+      drillIndex = 0;
+      renderDrillQuestion();
+    }
+
+    function renderDrillQuestion() {
+      const box = document.getElementById('drill-question-box');
+      const q = drillQuestions[drillIndex];
+      if (!q) return;
+
+      let optionsHtml = '';
+      q.options.forEach((opt, idx) => {
+        optionsHtml += `
+          <button onclick="checkDrillAnswer(${idx})" class="drill-opt-btn w-full text-left p-3.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs transition flex items-center justify-between">
+            <span>${opt}</span>
+            <span class="text-slate-300 font-bold">Pilih</span>
+          </button>
+        `;
+      });
+
+      box.innerHTML = `
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-blue-600 uppercase">Drill Soal ${drillIndex + 1} dari ${drillQuestions.length} (Acak Otomatis)</span>
+          <span class="text-[11px] bg-slate-200 text-slate-700 font-bold px-2.5 py-0.5 rounded-full uppercase">${q.type}</span>
+        </div>
+        <div class="text-sm font-semibold text-slate-900 leading-relaxed whitespace-pre-line">${q.question}</div>
+        <div class="space-y-2 pt-2">${optionsHtml}</div>
+        <div id="drill-feedback" class="hidden mt-4 p-4 rounded-xl text-xs leading-relaxed"></div>
+        <div class="flex justify-between items-center pt-4 border-t border-slate-200">
+          <button onclick="navigateDrill(-1)" ${drillIndex === 0 ? 'disabled' : ''} class="text-xs font-bold text-slate-500 hover:text-slate-800 disabled:opacity-30">Sebelumnya</button>
+          <button onclick="navigateDrill(1)" class="text-xs font-bold text-blue-600 hover:text-blue-700">Soal Acak Berikutnya →</button>
+        </div>
+      `;
+      lucide.createIcons();
+    }
+
+    function checkDrillAnswer(chosenIdx) {
+      const q = drillQuestions[drillIndex];
+      const feedback = document.getElementById('drill-feedback');
+      feedback.classList.remove('hidden');
+
+      const buttons = document.querySelectorAll('.drill-opt-btn');
+      buttons.forEach(b => b.classList.add('pointer-events-none'));
+
+      if (q.type !== 'TKP') {
+        const isCorrect = chosenIdx === q.correct;
+        if (isCorrect) {
+          playBeep(850, 0.1);
+          feedback.className = "mt-4 p-4 rounded-xl text-xs bg-emerald-50 border border-emerald-200 text-emerald-900";
+          feedback.innerHTML = `<strong>Tepat Sekali!</strong> Jawaban Anda benar (+5).<br><span class="mt-1 block">${q.explanation}</span>`;
+        } else {
+          playBeep(320, 0.15, 'sawtooth');
+          feedback.className = "mt-4 p-4 rounded-xl text-xs bg-red-50 border border-red-200 text-red-900";
+          feedback.innerHTML = `<strong>Kurang Tepat.</strong> Kunci yang benar adalah pilihan <strong>${String.fromCharCode(65 + q.correct)}</strong>.<br><span class="mt-1 block">${q.explanation}</span>`;
+        }
+      } else {
+        playBeep(750, 0.08);
+        const bobot = q.weights[chosenIdx];
+        feedback.className = "mt-4 p-4 rounded-xl text-xs bg-blue-50 border border-blue-200 text-blue-900";
+        feedback.innerHTML = `<strong>Pilihan Diterima.</strong> Anda memperoleh bobot <strong>${bobot} dari 5 poin</strong>.<br><span class="mt-1 block">${q.explanation}</span>`;
+      }
+    }
+
+    function navigateDrill(step) {
+      playBeep(600, 0.04);
+      const next = drillIndex + step;
+      if (next >= 0 && next < drillQuestions.length) {
+        drillIndex = next;
+        renderDrillQuestion();
+      }
+    }
+
+    /* ========================================================
+       PWA INSTALLATION & SERVICE WORKER BLOB
+       ======================================================== */
+    function setupPWA() {
+      const manifest = {
+        name: "Pejuang NIP - Kursus & CAT SKD",
+        short_name: "Pejuang NIP",
+        start_url: window.location.href,
+        display: "standalone",
+        background_color: "#f8fafc",
+        theme_color: "#1e3a8a",
+        icons: [
+          {
+            src: "https://placehold.co/192x192/1e3a8a/ffffff.png?text=NIP",
+            sizes: "192x192",
+            type: "image/png"
+          },
+          {
+            src: "https://placehold.co/512x512/1e3a8a/ffffff.png?text=PejuangNIP",
+            sizes: "512x512",
+            type: "image/png"
+          }
+        ]
+      };
+      const stringManifest = JSON.stringify(manifest);
+      const blob = new Blob([stringManifest], { type: 'application/json' });
+      const manifestURL = URL.createObjectURL(blob);
+      document.querySelector('#manifest-placeholder').setAttribute('href', manifestURL);
+
+      if ('serviceWorker' in navigator) {
+        const swCode = `
+          self.addEventListener('install', (e) => { self.skipWaiting(); });
+          self.addEventListener('activate', (e) => { e.waitUntil(self.clients.claim()); });
+          self.addEventListener('fetch', (e) => { e.respondWith(fetch(e.request).catch(() => caches.match(e.request))); });
+        `;
+        const swBlob = new Blob([swCode], { type: 'text/javascript' });
+        navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
+      }
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        const btn = document.getElementById('btnPwaInstall');
+        if (btn) btn.classList.remove('hidden');
+      });
+    }
+
+    function installPWA() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showToast("Aplikasi Pejuang NIP berhasil dipasang!");
+          }
+          deferredPrompt = null;
+          document.getElementById('btnPwaInstall').classList.add('hidden');
+        });
+      } else {
+        showToast("Untuk menginstal di iOS/Android, gunakan menu 'Tambahkan ke Layar Utama' (Add to Home Screen) pada browser.");
+      }
+    }
+
+    /* Initialize Application on Window Load */
+    window.onload = function() {
+      lucide.createIcons();
+      setupPWA();
+      selectLesson(0);
+      setDrillCategory('all');
+    };
+  </script>
+</body>
+</html>
